@@ -1,0 +1,23 @@
+html {
+    font-family: sans-serif;
+    line-height: 130%;
+}
+
+.container {
+    max-width: 30em;
+    margin: 0 auto;
+}
+
+#output {
+    margin-top: 1em;
+}
+
+br {
+    line-height: 200%;
+}
+
+footer {
+    margin: 10px;
+    font-size: 0.7em;
+    opacity: 70%;
+}

@@ -1,5 +1,3 @@
-const apiKey = 'sk-CHANGEME'
-
 const endpoint = 'https://api.openai.com/v1/engines/text-davinci-003/completions'
 
 const completion = (apiKey, data) => {
@@ -18,16 +16,35 @@ const completion = (apiKey, data) => {
         })
 }
 
-window.addEventListener('load', () => {
-    const input = `Q: ${prompt('Question to AI:')}\nA:`
-    document.body.innerText = input
-
-    const response = completion(apiKey, {
-        prompt: input,
-        max_tokens: 200,
-        stop: '\n'
+const setupAPIKeyInput = () => {
+    const element = document.querySelector('#api-key')
+    const savedAPIKey = localStorage.getItem('api-key') || ''
+    element.value = savedAPIKey
+    element.addEventListener('input', () => {
+        console.log('saving:', element.value)
+        localStorage.setItem('api-key', element.value)
     })
-    response.then(text => {
-        document.body.innerText = input + text
+}
+
+window.addEventListener('load', () => {
+    setupAPIKeyInput()
+
+    document.querySelector('form').addEventListener('submit', event => {
+        event.preventDefault()
+
+        const input = document.querySelector('#prompt').value
+        const promptText = `Q: ${input}\nA:`
+        const element = document.querySelector('#output')
+        element.innerText = 'Loading...'
+
+        const apiKey = localStorage.getItem('api-key')
+        const response = completion(apiKey, {
+            prompt: promptText,
+            max_tokens: 200,
+            stop: '\n'
+        })
+        response.then(completionText => {
+            element.innerText = completionText
+        })
     })
 })
