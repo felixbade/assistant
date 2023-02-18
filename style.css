@@ -16,6 +16,15 @@ br {
     line-height: 200%;
 }
 
+a, a:visited {
+    text-decoration: none;
+    color: hsl(220, 75%, 55%);
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 footer {
     margin-top: 10px;
     font-size: 0.7em;
