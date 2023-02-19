@@ -1,10 +1,7 @@
-html {
-    font-family: sans-serif;
-    line-height: 130%;
-}
-
 body {
     margin: 0;
+    font-family: sans-serif;
+    line-height: 130%;
 }
 
 .container {
@@ -52,6 +49,8 @@ a:hover {
 
 .disclaimer {
     font-size: 0.7em;
+    line-height: 130%;
+    margin: 0.35em 0;
 }
 
 footer {
