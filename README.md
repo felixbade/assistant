@@ -10,4 +10,4 @@ https://question.bloat.app
 
 ## In the future
 - Install on your computer as a light-weight Chrome app
-- Customize the assistant’s brief in the promptp
+- Customize the assistant’s brief in the prompt
