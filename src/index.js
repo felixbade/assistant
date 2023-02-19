@@ -32,7 +32,18 @@ window.addEventListener('load', () => {
     document.querySelector('form').addEventListener('submit', event => {
         event.preventDefault()
 
+        const element = document.querySelector('#output')
         const input = document.querySelector('#prompt').value
+        document.querySelector('#prompt').value = ''
+
+        const messageContainer = document.createElement('div')
+        messageContainer.classList.add('my-message-container')
+        element.appendChild(messageContainer)
+
+        const messageBubble = document.createElement('div')
+        messageBubble.classList.add('my-message-bubble')
+        messageBubble.innerText = input
+        messageContainer.appendChild(messageBubble)
 
         const separator = '"""""'
         const in_title = 'User'
@@ -40,8 +51,7 @@ window.addEventListener('load', () => {
         const brief = 'Assistant is a large language model designed to give the most helpful possible answer to the user.'
         const promptText = `${brief}\n\n${in_title}:\n${separator}\n${input}\n${separator}\n\n${out_title}:\n${separator}`
 
-        const element = document.querySelector('#output')
-        element.innerHTML = '<br>Loading...'
+        // element.innerHTML = '<br>Loading...'
 
         const apiKey = localStorage.getItem('api-key')
         const response = completion(apiKey, {
@@ -50,14 +60,18 @@ window.addEventListener('load', () => {
             stop: separator
         })
         response.then(completionText => {
-            element.innerText = '' // remove "Loading..."
+            // element.innerText = '' // remove "Loading..."
 
             completionText = completionText.trim()
 
+            const messageContainer = document.createElement('div')
+            messageContainer.classList.add('response-container')
+            element.appendChild(messageContainer)
+
             const messageBubble = document.createElement('div')
-            messageBubble.classList.add('output-bubble')
+            messageBubble.classList.add('response-bubble')
             messageBubble.innerText = completionText
-            element.appendChild(messageBubble)
+            messageContainer.appendChild(messageBubble)
         })
     })
 })

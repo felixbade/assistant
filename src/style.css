@@ -25,11 +25,33 @@ input {
     font-size: 16px;
 }
 
-.output-bubble {
+.response-container {
+    display: flex;
+    justify-content: start;
+}
+
+.response-bubble {
     margin-top: 1em;
+    display: inline-block;
 
     /* text bubble */
     background-color: hsl(0, 0%, 90%);
+    padding: 0.6em 0.8em;
+    border-radius: 0.7em;
+}
+
+.my-message-container {
+    display: flex;
+    justify-content: end;
+}
+
+.my-message-bubble {
+    margin-top: 1em;
+    display: inline-block;
+
+    /* text bubble */
+    background-color: hsl(215, 90%, 50%);
+    color: white;
     padding: 0.6em 0.8em;
     border-radius: 0.7em;
 }
