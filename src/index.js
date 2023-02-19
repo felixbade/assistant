@@ -46,10 +46,14 @@ const addMessage = (message, type) => {
     messageBubble.innerHTML = renderMarkdown(message)
     messageContainer.appendChild(messageBubble)
 
+    const copiedIndicator = document.createElement('span')
+    copiedIndicator.classList.add('copied-indicator')
+    messageContainer.appendChild(copiedIndicator)
+
     messageBubble.addEventListener('click', () => {
         navigator.clipboard.writeText(message)
         .then(() => {
-            alert('Text copied to clipboard')
+            copiedIndicator.innerText = 'Copied!'
         })
         .catch((error) => {
             alert('Error copying text to clipboard:', error)

@@ -27,7 +27,8 @@ input {
 
 .response-container {
     display: flex;
-    justify-content: start;
+    align-items: start;
+    flex-direction: column;
 }
 
 .response-bubble {
@@ -42,7 +43,8 @@ input {
 
 .my-message-container {
     display: flex;
-    justify-content: end;
+    align-items: end;
+    flex-direction: column;
 }
 
 .my-message-bubble {
@@ -54,6 +56,10 @@ input {
     color: white;
     padding: 0.6em 0.8em;
     border-radius: 0.7em;
+}
+
+.copied-indicator {
+    font-size: 0.8em;
 }
 
 p {
