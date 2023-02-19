@@ -50,7 +50,7 @@ window.addEventListener('load', () => {
             stop: separator
         })
         response.then(completionText => {
-            element.innerText = completionText
+            element.innerText = completionText.trim()
         })
     })
 })
