@@ -29,8 +29,8 @@ body {
     width: 100%;
     max-width: 28em; /* .container is 30em, padding 1em + 1em */
     padding: 1em;
+    padding-bottom: calc(1em + env(safe-area-inset-bottom));
     margin-left: -1em;
-    margin-bottom: env(safe-area-inset-bottom);
 }
 
 input {
