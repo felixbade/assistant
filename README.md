@@ -2,7 +2,9 @@
 
 https://question.bloat.app
 
-- Ask questions from Open AI’s GPT-3 `davinci-003` engine
+Ask questions from Open AI’s GPT-3 `davinci-003` engine
+
+## Why?
 - No more daily logouts from the playground - OpenAI API key is stored in `localStorage`
 - Can be added to the phone’s home screen
 - Token-based cost, instead of flat 20$/mo
