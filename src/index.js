@@ -57,8 +57,15 @@ const addMessage = (message, type) => {
         })
         .catch((error) => {
             alert('Error copying text to clipboard:', error)
-        });
-      });
+        })
+    })
+
+    window.addEventListener('click', () => {
+        const oldCopiedIndicators = document.querySelectorAll('.copied-indicator')
+        for (const indicator of oldCopiedIndicators) {
+            indicator.innerText = ''
+        }
+    })
 }
 
 const addSentMessage = message => {
