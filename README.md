@@ -1,6 +1,6 @@
 # Web UI for Open AI
 
-https://question.bloat.app
+https://assistant.bloat.app
 
 Ask questions from Open AI’s GPT-3 `davinci-003` engine
 
