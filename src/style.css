@@ -99,6 +99,14 @@ input[type=text] {
     border-radius: 1em;
 }
 
+button {
+    appearance: none;
+    background-color: hsl(215, 90%, 50%);
+    border: none;
+    padding: 0.5em 0.8em;
+    border-radius: 2em;
+}
+
 @media (prefers-color-scheme: dark) {
     body {
         background-color: hsl(215, 20%, 10%);
@@ -114,6 +122,11 @@ input[type=text] {
 
     #compose-box {
         background-color: hsl(215, 15%, 22%);
+    }
+
+    button {
+        background-color: hsl(215, 70%, 50%);
+        color: white;
     }
 
     .response-bubble {
