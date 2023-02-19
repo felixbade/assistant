@@ -62,7 +62,7 @@ input {
     background-color: var(--response-bg);
     color: var(--fg);
     padding: 0.6em 0.8em;
-    border-radius: 0.8em;
+    border-radius: 0.9em;
 }
 
 .my-message-container {
@@ -79,7 +79,7 @@ input {
     background-color: var(--my-message-bg);
     color: var(--my-message-fg);
     padding: 0.6em 0.8em;
-    border-radius: 0.8em;
+    border-radius: 0.9em;
 }
 
 .copied-indicator {
