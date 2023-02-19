@@ -102,6 +102,7 @@ input[type=text] {
 button {
     appearance: none;
     background-color: hsl(215, 90%, 50%);
+    color: white;
     border: none;
     padding: 0.5em 0.8em;
     border-radius: 2em;
