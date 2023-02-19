@@ -41,7 +41,7 @@ window.addEventListener('load', () => {
         const promptText = `${brief}\n\n${in_title}:\n${separator}\n${input}\n${separator}\n\n${out_title}:\n${separator}`
 
         const element = document.querySelector('#output')
-        element.innerText = 'Loading...'
+        element.innerHTML = '<br>Loading...'
 
         const apiKey = localStorage.getItem('api-key')
         const response = completion(apiKey, {
@@ -50,7 +50,14 @@ window.addEventListener('load', () => {
             stop: separator
         })
         response.then(completionText => {
-            element.innerText = completionText.trim()
+            element.innerText = '' // remove "Loading..."
+
+            completionText = completionText.trim()
+
+            const messageBubble = document.createElement('div')
+            messageBubble.classList.add('output-bubble')
+            messageBubble.innerText = completionText
+            element.appendChild(messageBubble)
         })
     })
 })
