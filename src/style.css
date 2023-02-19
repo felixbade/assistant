@@ -56,6 +56,10 @@ input {
     border-radius: 0.7em;
 }
 
+p {
+    margin: 0;
+}
+
 br {
     line-height: 200%;
 }

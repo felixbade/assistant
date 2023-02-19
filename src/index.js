@@ -26,6 +26,14 @@ const setupAPIKeyInput = () => {
     })
 }
 
+const renderMarkdown = md => {
+    console.log(md)
+
+    return DOMPurify.sanitize(marked.parse(md, {
+        gfm: true
+    }))
+}
+
 const addSentMessage = message => {
     const element = document.querySelector('#output')
 
@@ -35,7 +43,7 @@ const addSentMessage = message => {
 
     const messageBubble = document.createElement('div')
     messageBubble.classList.add('my-message-bubble')
-    messageBubble.innerHTML = DOMPurify.sanitize(marked.parseInline(message))
+    messageBubble.innerHTML = renderMarkdown(message)
     messageContainer.appendChild(messageBubble)
 }
 
@@ -48,7 +56,7 @@ const addReceivedMessage = message => {
 
     const messageBubble = document.createElement('div')
     messageBubble.classList.add('response-bubble')
-    messageBubble.innerHTML = DOMPurify.sanitize(marked.parseInline(message))
+    messageBubble.innerHTML = renderMarkdown(message)
     messageContainer.appendChild(messageBubble)
 }
 
@@ -58,7 +66,7 @@ window.addEventListener('load', () => {
     const separator = '"""""'
     const in_title = 'User'
     const out_title = 'Assistant'
-    const brief = 'Assistant is a large language model designed to give the most helpful possible answer to the user. Response format is ALWAYS markdown.'
+    const brief = 'Assistant is a large language model designed to give the most helpful possible answer to the user. Response format is ALWAYS markdown, especially for code.'
 
     let promptText = brief
 
