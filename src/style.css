@@ -26,11 +26,22 @@ body {
     background-color: var(--response-bg);
     position: fixed;
     bottom: 0;
-    width: 100%;
-    max-width: 28em; /* .container is 30em, padding 1em + 1em */
-    padding: 1em;
+
+    padding: 0.8em;
+    width: calc(100% - 1.6em);
+    max-width: 30em;
     padding-bottom: calc(1em + env(safe-area-inset-bottom));
     margin-left: -1em;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+#prompt {
+    font-size: 1.1em;
+    padding: 0.3em 0.6em;
+    flex: 1;
+    margin-right: 0.6em;
 }
 
 input {
@@ -118,6 +129,7 @@ button {
     border: none;
     padding: 0.5em 0.8em;
     border-radius: 2em;
+    font-size: 1em;
 }
 
 @media (prefers-color-scheme: dark) {
