@@ -33,7 +33,13 @@ window.addEventListener('load', () => {
         event.preventDefault()
 
         const input = document.querySelector('#prompt').value
-        const promptText = `Q: ${input}\nA:`
+
+        const separator = '"""""'
+        const in_title = 'User'
+        const out_title = 'Assistant'
+        const brief = 'Assistant is a large language model designed to give the most helpful possible answer to the user.'
+        const promptText = `${brief}\n\n${in_title}:\n${separator}\n${input}\n${separator}\n\n${out_title}:\n${separator}`
+
         const element = document.querySelector('#output')
         element.innerText = 'Loading...'
 
@@ -41,7 +47,7 @@ window.addEventListener('load', () => {
         const response = completion(apiKey, {
             prompt: promptText,
             max_tokens: 200,
-            stop: '\n'
+            stop: separator
         })
         response.then(completionText => {
             element.innerText = completionText
