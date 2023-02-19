@@ -3,9 +3,30 @@ html {
     line-height: 130%;
 }
 
+body {
+    margin: 0;
+}
+
 .container {
     max-width: 30em;
     margin: 0 auto;
+    padding: 0.7em 1em;
+}
+
+#compose-box {
+    background-color: hsl(0, 0%, 85%);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-width: 28em; /* .container is 30em, padding 1em + 1em */
+    padding: 1em;
+    margin-left: -1em;
+    margin-bottom: env(safe-area-inset-bottom);
+}
+
+
+input {
+    font-size: 16px;
 }
 
 #output {
