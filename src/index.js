@@ -35,7 +35,7 @@ const addSentMessage = message => {
 
     const messageBubble = document.createElement('div')
     messageBubble.classList.add('my-message-bubble')
-    messageBubble.innerText = message
+    messageBubble.innerHTML = DOMPurify.sanitize(marked.parseInline(message))
     messageContainer.appendChild(messageBubble)
 }
 
@@ -48,7 +48,7 @@ const addReceivedMessage = message => {
 
     const messageBubble = document.createElement('div')
     messageBubble.classList.add('response-bubble')
-    messageBubble.innerText = message
+    messageBubble.innerHTML = DOMPurify.sanitize(marked.parseInline(message))
     messageContainer.appendChild(messageBubble)
 }
 
@@ -58,7 +58,7 @@ window.addEventListener('load', () => {
     const separator = '"""""'
     const in_title = 'User'
     const out_title = 'Assistant'
-    const brief = 'Assistant is a large language model designed to give the most helpful possible answer to the user.'
+    const brief = 'Assistant is a large language model designed to give the most helpful possible answer to the user. Response format is ALWAYS markdown.'
 
     let promptText = brief
 
