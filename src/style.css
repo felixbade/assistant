@@ -91,10 +91,25 @@ footer {
     opacity: 70%;
 }
 
+input[type=text] {
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid hsla(0, 0%, 0%, 20%);
+    padding: 0.2em 0.5em;
+    border-radius: 1em;
+}
+
 @media (prefers-color-scheme: dark) {
     body {
         background-color: hsl(215, 20%, 10%);
         color: hsl(0, 0%, 90%);
+    }
+
+    input[type=text] {
+        color: hsl(0, 0%, 90%);
+        border: 2px solid hsla(0, 0%, 90%, 40%);
+        padding: 0.2em 0.5em;
+        border-radius: 1em;
     }
 
     #compose-box {
