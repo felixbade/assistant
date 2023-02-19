@@ -90,3 +90,28 @@ footer {
     font-size: 0.7em;
     opacity: 70%;
 }
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: hsl(215, 20%, 10%);
+        color: hsl(0, 0%, 90%);
+    }
+
+    #compose-box {
+        background-color: hsl(215, 15%, 22%);
+    }
+
+    .response-bubble {
+        background-color: hsl(215, 15%, 22%);
+        color: hsl(0, 0%, 90%);
+    }
+
+    .my-message-bubble {
+        background-color: hsl(215, 70%, 50%);
+        color: white;
+    }
+
+    a, a:visited {
+        color: hsl(220, 75%, 55%);
+    }
+}
