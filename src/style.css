@@ -1,7 +1,19 @@
+:root {
+    --bg: white;
+    --fg: black;
+    --my-message-bg: hsl(215, 90%, 50%);
+    --my-message-fg: white;
+    --response-bg: hsl(0, 0%, 90%);
+    --link: hsl(220, 75%, 55%);
+    --input-border: hsla(0, 0%, 0%, 20%);
+}
+
 body {
     margin: 0;
     font-family: sans-serif;
     line-height: 130%;
+    background-color: var(--bg);
+    color: var(--fg);
 }
 
 .container {
@@ -11,7 +23,7 @@ body {
 }
 
 #compose-box {
-    background-color: hsl(0, 0%, 90%);
+    background-color: var(--response-bg);
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -36,7 +48,8 @@ input {
     display: inline-block;
 
     /* text bubble */
-    background-color: hsl(0, 0%, 90%);
+    background-color: var(--response-bg);
+    color: var(--fg);
     padding: 0.6em 0.8em;
     border-radius: 0.7em;
 }
@@ -52,8 +65,8 @@ input {
     display: inline-block;
 
     /* text bubble */
-    background-color: hsl(215, 90%, 50%);
-    color: white;
+    background-color: var(--my-message-bg);
+    color: var(--my-message-fg);
     padding: 0.6em 0.8em;
     border-radius: 0.7em;
 }
@@ -72,7 +85,7 @@ br {
 
 a, a:visited {
     text-decoration: none;
-    color: hsl(220, 75%, 55%);
+    color: var(--link);
 }
 
 a:hover {
@@ -94,53 +107,29 @@ footer {
 input[type=text] {
     appearance: none;
     background-color: transparent;
-    border: 2px solid hsla(0, 0%, 0%, 20%);
+    color: var(--fg);
+    border: 2px solid var(--input-border);
     padding: 0.2em 0.5em;
     border-radius: 1em;
 }
 
 button {
     appearance: none;
-    background-color: hsl(215, 90%, 50%);
-    color: white;
+    background-color: var(--my-message-bg);
+    color: var(--my-message-fg);
     border: none;
     padding: 0.5em 0.8em;
     border-radius: 2em;
 }
 
 @media (prefers-color-scheme: dark) {
-    body {
-        background-color: hsl(215, 20%, 10%);
-        color: hsl(0, 0%, 90%);
-    }
-
-    input[type=text] {
-        color: hsl(0, 0%, 90%);
-        border: 2px solid hsla(0, 0%, 90%, 40%);
-        padding: 0.2em 0.5em;
-        border-radius: 1em;
-    }
-
-    #compose-box {
-        background-color: hsl(215, 15%, 22%);
-    }
-
-    button {
-        background-color: hsl(215, 70%, 50%);
-        color: white;
-    }
-
-    .response-bubble {
-        background-color: hsl(215, 15%, 22%);
-        color: hsl(0, 0%, 90%);
-    }
-
-    .my-message-bubble {
-        background-color: hsl(215, 70%, 50%);
-        color: white;
-    }
-
-    a, a:visited {
-        color: hsl(220, 75%, 55%);
+    :root {
+        --bg: hsl(215, 20%, 10%);
+        --fg: hsl(0, 0%, 90%);
+        --my-message-bg: hsl(215, 70%, 50%);
+        --my-message-fg: white;
+        --response-bg: hsl(215, 15%, 22%);
+        --link: hsl(220, 75%, 55%);
+        --input-border: hsla(0, 0%, 90%, 40%);
     }
 }
