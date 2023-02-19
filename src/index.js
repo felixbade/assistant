@@ -26,24 +26,42 @@ const setupAPIKeyInput = () => {
     })
 }
 
+const addSentMessage = message => {
+    const element = document.querySelector('#output')
+
+    const messageContainer = document.createElement('div')
+    messageContainer.classList.add('my-message-container')
+    element.appendChild(messageContainer)
+
+    const messageBubble = document.createElement('div')
+    messageBubble.classList.add('my-message-bubble')
+    messageBubble.innerText = message
+    messageContainer.appendChild(messageBubble)
+}
+
+const addReceivedMessage = message => {
+    const element = document.querySelector('#output')
+
+    const messageContainer = document.createElement('div')
+    messageContainer.classList.add('response-container')
+    element.appendChild(messageContainer)
+
+    const messageBubble = document.createElement('div')
+    messageBubble.classList.add('response-bubble')
+    messageBubble.innerText = message
+    messageContainer.appendChild(messageBubble)
+}
+
 window.addEventListener('load', () => {
     setupAPIKeyInput()
 
     document.querySelector('form').addEventListener('submit', event => {
         event.preventDefault()
 
-        const element = document.querySelector('#output')
         const input = document.querySelector('#prompt').value
         document.querySelector('#prompt').value = ''
 
-        const messageContainer = document.createElement('div')
-        messageContainer.classList.add('my-message-container')
-        element.appendChild(messageContainer)
-
-        const messageBubble = document.createElement('div')
-        messageBubble.classList.add('my-message-bubble')
-        messageBubble.innerText = input
-        messageContainer.appendChild(messageBubble)
+        addSentMessage(input)
 
         const separator = '"""""'
         const in_title = 'User'
@@ -64,14 +82,7 @@ window.addEventListener('load', () => {
 
             completionText = completionText.trim()
 
-            const messageContainer = document.createElement('div')
-            messageContainer.classList.add('response-container')
-            element.appendChild(messageContainer)
-
-            const messageBubble = document.createElement('div')
-            messageBubble.classList.add('response-bubble')
-            messageBubble.innerText = completionText
-            messageContainer.appendChild(messageBubble)
+            addReceivedMessage(completionText)
         })
     })
 })
