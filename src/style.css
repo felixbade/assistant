@@ -105,7 +105,6 @@ footer {
 }
 
 input[type=text] {
-    appearance: none;
     background-color: var(--bg);
     color: var(--fg);
     border: 2px solid var(--input-border);
@@ -114,7 +113,6 @@ input[type=text] {
 }
 
 button {
-    appearance: none;
     background-color: var(--my-message-bg);
     color: var(--my-message-fg);
     border: none;
