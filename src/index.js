@@ -34,30 +34,35 @@ const renderMarkdown = md => {
     }))
 }
 
-const addSentMessage = message => {
+const addMessage = (message, type) => {
     const element = document.querySelector('#output')
 
     const messageContainer = document.createElement('div')
-    messageContainer.classList.add('my-message-container')
+    messageContainer.classList.add(`${type}-container`)
     element.appendChild(messageContainer)
 
     const messageBubble = document.createElement('div')
-    messageBubble.classList.add('my-message-bubble')
+    messageBubble.classList.add(`${type}-bubble`)
     messageBubble.innerHTML = renderMarkdown(message)
     messageContainer.appendChild(messageBubble)
+
+    messageBubble.addEventListener('click', () => {
+        navigator.clipboard.writeText(message)
+        .then(() => {
+            alert('Text copied to clipboard')
+        })
+        .catch((error) => {
+            alert('Error copying text to clipboard:', error)
+        });
+      });
+}
+
+const addSentMessage = message => {
+    addMessage(message, 'my-message')
 }
 
 const addReceivedMessage = message => {
-    const element = document.querySelector('#output')
-
-    const messageContainer = document.createElement('div')
-    messageContainer.classList.add('response-container')
-    element.appendChild(messageContainer)
-
-    const messageBubble = document.createElement('div')
-    messageBubble.classList.add('response-bubble')
-    messageBubble.innerHTML = renderMarkdown(message)
-    messageContainer.appendChild(messageBubble)
+    addMessage(message, 'response')
 }
 
 window.addEventListener('load', () => {
