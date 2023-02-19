@@ -55,6 +55,13 @@ const addReceivedMessage = message => {
 window.addEventListener('load', () => {
     setupAPIKeyInput()
 
+    const separator = '"""""'
+    const in_title = 'User'
+    const out_title = 'Assistant'
+    const brief = 'Assistant is a large language model designed to give the most helpful possible answer to the user.'
+
+    let promptText = brief
+
     document.querySelector('form').addEventListener('submit', event => {
         event.preventDefault()
 
@@ -62,14 +69,9 @@ window.addEventListener('load', () => {
         document.querySelector('#prompt').value = ''
 
         addSentMessage(input)
-
-        const separator = '"""""'
-        const in_title = 'User'
-        const out_title = 'Assistant'
-        const brief = 'Assistant is a large language model designed to give the most helpful possible answer to the user.'
-        const promptText = `${brief}\n\n${in_title}:\n${separator}\n${input}\n${separator}\n\n${out_title}:\n${separator}`
-
         // element.innerHTML = '<br>Loading...'
+
+        promptText = `${promptText}\n\n${in_title}:\n${separator}\n${input}\n${separator}\n\n${out_title}:\n${separator}`
 
         const apiKey = localStorage.getItem('api-key')
         const response = completion(apiKey, {
@@ -81,6 +83,7 @@ window.addEventListener('load', () => {
             // element.innerText = '' // remove "Loading..."
 
             completionText = completionText.trim()
+            promptText = `${promptText}\n${completionText}\n${separator}`
 
             addReceivedMessage(completionText)
         })
