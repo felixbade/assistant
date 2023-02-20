@@ -100,7 +100,7 @@ window.addEventListener('load', () => {
         const apiKey = localStorage.getItem('api-key')
         const response = completion(apiKey, {
             prompt: promptText,
-            max_tokens: 200,
+            max_tokens: 1000,
             stop: separator
         })
         response.then(completionText => {
