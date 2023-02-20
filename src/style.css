@@ -14,6 +14,7 @@ body {
     line-height: 130%;
     background-color: var(--bg);
     color: var(--fg);
+    margin-bottom: calc(4em + env(safe-area-inset-bottom));
 }
 
 .container {
