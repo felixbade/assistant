@@ -17,14 +17,32 @@ const chatCompletion = (apiKey, data) => {
         })
 }
 
+const hideStartView = () => {
+    document.querySelector('#start-view').classList.add('hidden')
+}
+
+const showStartView = () => {
+    document.querySelector('#start-view').classList.remove('hidden')
+}
+
 const setupAPIKeyInput = () => {
     const element = document.querySelector('#api-key')
     const savedAPIKey = localStorage.getItem('api-key') || ''
     element.value = savedAPIKey
     element.addEventListener('input', () => {
-        console.log('saving:', element.value)
-        localStorage.setItem('api-key', element.value)
+        const key = element.value
+        console.log('saving:', key)
+        localStorage.setItem('api-key', key)
+        if (key) {
+            hideStartView()
+        } else {
+            showStartView()
+        }
     })
+
+    if (savedAPIKey) {
+        hideStartView()
+    }
 }
 
 const renderMarkdown = md => {

@@ -23,6 +23,14 @@ body {
     padding: 0.7em 1em;
 }
 
+#start-view {
+    background-color: hsl(120, 50%, 75%);
+    padding: 1em;
+    border-radius: 1em;
+    display: inline-block;
+    margin: 1em 0;
+}
+
 #compose-box {
     background-color: var(--response-bg);
     position: fixed;
@@ -143,4 +151,8 @@ button {
         --link: hsl(220, 75%, 55%);
         --input-border: hsla(0, 0%, 90%, 40%);
     }
+}
+
+.hidden {
+    display: none !important;
 }
