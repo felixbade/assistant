@@ -6,6 +6,8 @@
     --response-bg: hsl(0, 0%, 90%);
     --link: hsl(220, 75%, 55%);
     --input-border: hsla(0, 0%, 0%, 20%);
+    --info: hsl(120, 50%, 80%);
+    --info-link: hsl(220, 100%, 30%);
 }
 
 body {
@@ -24,11 +26,17 @@ body {
 }
 
 #start-view {
-    background-color: hsl(120, 50%, 75%);
+    background-color: var(--info);
     padding: 1em;
     border-radius: 1em;
     display: inline-block;
     margin: 1em 0;
+    font-size: 1.1em;
+}
+
+#start-view a {
+    color: var(--info-link);
+    text-decoration: underline;
 }
 
 #compose-box {
@@ -141,18 +149,20 @@ button {
     font-size: 1em;
 }
 
+.hidden {
+    display: none !important;
+}
+
 @media (prefers-color-scheme: dark) {
     :root {
         --bg: hsl(215, 20%, 10%);
-        --fg: hsl(0, 0%, 90%);
+        --fg: hsl(0, 0%, 95%);
         --my-message-bg: hsl(215, 70%, 50%);
         --my-message-fg: white;
         --response-bg: hsl(215, 15%, 22%);
         --link: hsl(220, 75%, 55%);
         --input-border: hsla(0, 0%, 90%, 40%);
+        --info: hsl(130, 30%, 25%);
+        --info-link: hsl(220, 100%, 85%);
     }
-}
-
-.hidden {
-    display: none !important;
 }
