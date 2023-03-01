@@ -1,6 +1,7 @@
-const endpoint = 'https://api.openai.com/v1/engines/text-davinci-003/completions'
+const chatCompletion = (apiKey, data) => {
+    const endpoint = 'https://api.openai.com/v1/chat/completions'
+    data.model = "gpt-3.5-turbo"
 
-const completion = (apiKey, data) => {
     return fetch(endpoint, {
         method: 'POST',
         headers: {
@@ -10,7 +11,7 @@ const completion = (apiKey, data) => {
         body: JSON.stringify(data)
     })
         .then(response => response.json())
-        .then(data => data.choices[0].text)
+        .then(data => data.choices[0].message)
         .catch(error => {
             console.error('Error:', error)
         })
@@ -79,12 +80,12 @@ const addReceivedMessage = message => {
 window.addEventListener('load', () => {
     setupAPIKeyInput()
 
-    const separator = '"""""'
-    const in_title = 'User'
-    const out_title = 'Assistant'
-    const brief = 'Assistant is a large language model designed to give the most helpful possible answer to the user. Response format is ALWAYS markdown, especially for code.'
-
-    let promptText = brief
+    let messages = [
+        {
+            "role": "system",
+            "content": "Response format is ALWAYS markdown, especially for code."
+        }
+    ]
 
     document.querySelector('form').addEventListener('submit', event => {
         event.preventDefault()
@@ -95,21 +96,23 @@ window.addEventListener('load', () => {
         addSentMessage(input)
         // element.innerHTML = '<br>Loading...'
 
-        promptText = `${promptText}\n\n${in_title}:\n${separator}\n${input}\n${separator}\n\n${out_title}:\n${separator}`
+        messages.push({
+            'role': 'user',
+            'content': input
+        })
 
         const apiKey = localStorage.getItem('api-key')
-        const response = completion(apiKey, {
-            prompt: promptText,
-            max_tokens: 1000,
-            stop: separator
+
+        const response = chatCompletion(apiKey, {
+            messages
         })
-        response.then(completionText => {
+
+        response.then(message => {
             // element.innerText = '' // remove "Loading..."
 
-            completionText = completionText.trim()
-            promptText = `${promptText}\n${completionText}\n${separator}`
+            messages.push(message)
 
-            addReceivedMessage(completionText)
+            addReceivedMessage(message.content)
         })
     })
 })
