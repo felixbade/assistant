@@ -2,7 +2,7 @@
 
 https://assistant.bloat.app
 
-Ask questions from Open AI’s GPT-3 `davinci-003` engine
+Ask questions from Open AI’s ChatGPT `gpt-3.5-turbo` engine
 
 ## Why?
 - No more daily logouts from the playground - OpenAI API key is stored in `localStorage`
