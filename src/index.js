@@ -95,6 +95,33 @@ const addReceivedMessage = message => {
     addMessage(message, 'response')
 }
 
+const smoothScroll = (targetPosition, duration) => {
+    const currentPosition = window.pageYOffset
+    const distance = targetPosition - currentPosition
+    const startTime = performance.now()
+
+    const easeInOutQuad = (t, b, c, d) => {
+        t /= d / 2
+        if (t < 1) return (c / 2) * t * t + b
+        t--
+        return (-c / 2) * (t * (t - 2) - 1) + b
+    }
+
+    const animationCallback = (time) => {
+        const elapsedTime = time - startTime
+        const scroll = easeInOutQuad(elapsedTime, currentPosition, distance, duration)
+        window.scrollTo(0, scroll)
+        if (elapsedTime < duration) requestAnimationFrame(animationCallback)
+    }
+
+    requestAnimationFrame(animationCallback)
+}
+
+const isScrolledToBottom = () => {
+    const { scrollTop, clientHeight, scrollHeight } = document.documentElement
+    return scrollTop + clientHeight >= scrollHeight
+}
+
 window.addEventListener('load', () => {
     setupAPIKeyInput()
 
@@ -112,6 +139,9 @@ window.addEventListener('load', () => {
         document.querySelector('#prompt').value = ''
 
         addSentMessage(input)
+        // scroll down always after sending message, even if wasn't before
+        smoothScroll(document.body.scrollHeight, 500)
+
         // element.innerHTML = '<br>Loading...'
 
         messages.push({
@@ -130,7 +160,9 @@ window.addEventListener('load', () => {
 
             messages.push(message)
 
+            const wasScrolledToBottom = isScrolledToBottom()
             addReceivedMessage(message.content)
+            if (wasScrolledToBottom) smoothScroll(document.body.scrollHeight, 500)
         })
     })
 })
