@@ -122,8 +122,26 @@ const isScrolledToBottom = () => {
     return scrollTop + clientHeight >= scrollHeight
 }
 
+const updateTextareaSize = (element) => {
+    element.style.height = 0
+
+    const style = window.getComputedStyle(element)
+    const paddingTop = parseFloat(style.getPropertyValue('padding-top'))
+    const paddingBottom = parseFloat(style.getPropertyValue('padding-bottom'))
+
+    const height = element.scrollHeight - paddingTop - paddingBottom
+
+    element.style.height = `${height}px`
+}
+
 window.addEventListener('load', () => {
     setupAPIKeyInput()
+
+    const textbox = document.querySelector('#prompt')
+    textbox.addEventListener("input", () => {
+        updateTextareaSize(textbox)
+    })
+    updateTextareaSize(textbox)
 
     let messages = [
         {
@@ -132,9 +150,7 @@ window.addEventListener('load', () => {
         }
     ]
 
-    document.querySelector('form').addEventListener('submit', event => {
-        event.preventDefault()
-
+    const submitMessage = () => {
         const input = document.querySelector('#prompt').value
         document.querySelector('#prompt').value = ''
 
@@ -164,5 +180,19 @@ window.addEventListener('load', () => {
             addReceivedMessage(message.content)
             if (wasScrolledToBottom) smoothScroll(document.body.scrollHeight, 500)
         })
+    }
+
+    textbox.addEventListener('keydown', (event) => {
+        if (event.code === 'Enter' && !event.ctrlKey && !event.altKey && !event.shiftKey) {
+            event.preventDefault()
+            submitMessage()
+            updateTextareaSize(textbox)
+        }
+    })
+
+    document.querySelector('form').addEventListener('submit', (event) => {
+        event.preventDefault()
+        submitMessage()
+        updateTextareaSize(textbox)
     })
 })

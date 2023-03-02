@@ -132,7 +132,9 @@ footer {
     opacity: 70%;
 }
 
-input[type=text] {
+input[type=text], textarea {
+    font-family: -apple-system, sans-serif;
+    line-height: 120%;
     background-color: var(--bg);
     color: var(--fg);
     border: 2px solid var(--input-border);
@@ -140,12 +142,17 @@ input[type=text] {
     border-radius: 1em;
 }
 
+textarea {
+    resize: none;
+    height: auto;
+}
+
 button {
     background-color: var(--my-message-bg);
     color: var(--my-message-fg);
     border: none;
     padding: 0.5em 0.8em;
-    border-radius: 2em;
+    border-radius: 19px;
     font-size: 1em;
 }
 
