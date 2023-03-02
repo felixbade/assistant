@@ -4,10 +4,10 @@
     --my-message-bg: hsl(215, 90%, 50%);
     --my-message-fg: white;
     --response-bg: hsl(0, 0%, 90%);
-    --link: hsl(220, 75%, 55%);
+    --link: hsl(220, 80%, 50%);
     --input-border: hsla(0, 0%, 0%, 20%);
     --info: hsl(120, 50%, 80%);
-    --info-link: hsl(220, 100%, 30%);
+    --info-link: hsl(210, 100%, 30%);
 }
 
 body {
