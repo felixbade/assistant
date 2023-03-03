@@ -46,10 +46,10 @@ body {
     position: fixed;
     bottom: 0;
 
-    padding: 0.8em;
-    width: calc(100% - 1.6em);
+    padding: 0.7em;
+    width: calc(100% - 1.4em);
     max-width: var(--chat-max-width);
-    padding-bottom: calc(1em + env(safe-area-inset-bottom));
+    padding-bottom: calc(0.8em + env(safe-area-inset-bottom));
     margin-left: -1em;
 
     display: flex;
@@ -60,7 +60,7 @@ body {
     font-size: 1.1em;
     padding: 0.3em 0.6em;
     flex: 1;
-    margin-right: 0.6em;
+    margin-right: 0.5em;
 }
 
 input {
