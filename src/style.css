@@ -164,11 +164,11 @@ button {
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --bg: hsl(215, 20%, 10%);
+        --bg: hsl(215, 20%, 9%);
         --fg: hsl(0, 0%, 95%);
         --my-message-bg: hsl(215, 70%, 50%);
         --my-message-fg: white;
-        --response-bg: hsl(215, 15%, 22%);
+        --response-bg: hsl(215, 15%, 20%);
         --link: hsl(215, 100%, 65%);
         --input-border: hsla(0, 0%, 90%, 40%);
         --info: hsl(130, 30%, 25%);
