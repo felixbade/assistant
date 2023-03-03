@@ -46,8 +46,6 @@ const setupAPIKeyInput = () => {
 }
 
 const renderMarkdown = md => {
-    console.log(md)
-
     return DOMPurify.sanitize(marked.parse(md, {
         gfm: true
     }))
