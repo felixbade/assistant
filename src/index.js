@@ -137,12 +137,6 @@ const updateTextareaSize = (element) => {
 window.addEventListener('load', () => {
     setupAPIKeyInput()
 
-    const textbox = document.querySelector('#prompt')
-    textbox.addEventListener("input", () => {
-        updateTextareaSize(textbox)
-    })
-    updateTextareaSize(textbox)
-
     let messages = [
         {
             "role": "system",
@@ -183,6 +177,8 @@ window.addEventListener('load', () => {
         })
     }
 
+    const textbox = document.querySelector('#prompt')
+
     textbox.addEventListener('keydown', (event) => {
         if (event.code === 'Enter' && !event.ctrlKey && !event.altKey && !event.shiftKey) {
             event.preventDefault()
@@ -196,4 +192,17 @@ window.addEventListener('load', () => {
         submitMessage()
         updateTextareaSize(textbox)
     })
+
+    textbox.addEventListener("input", () => {
+        updateTextareaSize(textbox)
+    })
+    updateTextareaSize(textbox)
+
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope)
+        }, (error) => {
+            console.log('ServiceWorker registration failed: ', err)
+        })
+    }
 })
