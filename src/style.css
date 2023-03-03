@@ -61,6 +61,7 @@ body {
     padding: 0.3em 0.6em;
     flex: 1;
     margin-right: 0.5em;
+    max-height: 70vh;
 }
 
 input {
