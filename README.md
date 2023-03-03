@@ -1,4 +1,4 @@
-# Web UI for Open AI
+# Web UI for ChatGPT
 
 https://assistant.bloat.app
 
