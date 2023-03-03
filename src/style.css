@@ -144,6 +144,10 @@ input[type=text], textarea {
     border-radius: 1em;
 }
 
+input[type=text]:focus, textarea:focus {
+    outline: none;
+}
+
 textarea {
     resize: none;
     height: auto;
