@@ -8,6 +8,8 @@
     --input-border: hsla(0, 0%, 0%, 20%);
     --info: hsl(120, 50%, 80%);
     --info-link: hsl(210, 100%, 30%);
+
+    --chat-max-width: 50em;
 }
 
 body {
@@ -20,7 +22,7 @@ body {
 }
 
 .container {
-    max-width: 30em;
+    max-width: var(--chat-max-width);
     margin: 0 auto;
     padding: 0.7em 1em;
 }
@@ -46,7 +48,7 @@ body {
 
     padding: 0.8em;
     width: calc(100% - 1.6em);
-    max-width: 30em;
+    max-width: var(--chat-max-width);
     padding-bottom: calc(1em + env(safe-area-inset-bottom));
     margin-left: -1em;
 
