@@ -178,4 +178,8 @@ button {
         --info: hsl(130, 30%, 25%);
         --info-link: hsl(220, 100%, 85%);
     }
+
+    * {
+        color-scheme: dark;
+    }
 }
