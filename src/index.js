@@ -85,14 +85,16 @@ const addMessage = (message, type) => {
             indicator.innerText = ''
         }
     })
+
+    return messageContainer
 }
 
 const addSentMessage = message => {
-    addMessage(message, 'my-message')
+    return addMessage(message, 'my-message')
 }
 
 const addReceivedMessage = message => {
-    addMessage(message, 'response')
+    return addMessage(message, 'response')
 }
 
 const smoothScroll = (targetPosition, duration) => {
@@ -158,7 +160,8 @@ window.addEventListener('load', () => {
         // scroll down always after sending message, even if wasn't before
         smoothScroll(document.body.scrollHeight, 500)
 
-        // element.innerHTML = '<br>Loading...'
+        const dot = '&#x25CF;'
+        const typingIndicatorElement = addReceivedMessage(`${dot} ${dot} ${dot}`)
 
         messages.push({
             'role': 'user',
@@ -172,7 +175,7 @@ window.addEventListener('load', () => {
         })
 
         response.then(message => {
-            // element.innerText = '' // remove "Loading..."
+            typingIndicatorElement.remove()
 
             messages.push(message)
 
