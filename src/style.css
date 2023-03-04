@@ -171,7 +171,7 @@ button {
     :root {
         --bg: hsl(215, 20%, 9%);
         --fg: hsl(0, 0%, 95%);
-        --my-message-bg: hsl(215, 70%, 50%);
+        --my-message-bg: hsl(215, 75%, 48%);
         --my-message-fg: white;
         --response-bg: hsl(215, 15%, 20%);
         --link: hsl(215, 100%, 65%);
