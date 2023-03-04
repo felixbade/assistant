@@ -13,3 +13,6 @@ Ask questions from Open AI’s ChatGPT `gpt-3.5-turbo` engine
 ## In the future
 - Install on your computer as a light-weight Chrome app
 - Customize the assistant’s brief in the prompt
+
+## 💙 Contributing 💙
+The best way to contribute is by adding feature requests and bug reports to the GitHub [issues](https://github.com/felixbade/chatgpt-web-ui/issues) – you don’t need to be a programmer for that. See `CONTRIBUTING.md` for details.
