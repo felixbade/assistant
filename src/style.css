@@ -109,6 +109,15 @@ input {
     color: var(--my-message-fg);
 }
 
+.my-message-bubble a {
+    color: var(--my-message-fg);
+    text-decoration: underline;
+}
+
+.my-message-bubble a:hover {
+    text-decoration-thickness: 2px;
+}
+
 .error {
     color: var(--error-fg);
 }
