@@ -49,8 +49,8 @@ body {
     position: fixed;
     bottom: 0;
 
-    padding: 0.7em;
-    width: calc(100% - 1.4em);
+    padding: 0.9em;
+    width: calc(100% - 1.8em);
     max-width: var(--chat-max-width);
     padding-bottom: calc(0.8em + env(safe-area-inset-bottom));
     margin-left: -1em;
@@ -63,6 +63,7 @@ body {
     font-size: 1.1em;
     padding: 0.3em 0.6em;
     flex: 1;
+    margin: 0;
     margin-right: 0.5em;
     max-height: 70vh;
 }
