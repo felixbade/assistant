@@ -1,6 +1,6 @@
 # Contributing
 
-You have discovered this page. Maybe you will also discover bugs or missing features. You can tell me about them in the GitHub [issues](https://github.com/felixbade/chatgpt-web-ui/issues).
+You found this page. Maybe you will also find bugs or missing features. You can tell me about them in the GitHub [issues](https://github.com/felixbade/chatgpt-web-ui/issues).
 
 ## Philosophy
 - OpenAI has made the best chat AI API. This tools makes the best human-interface for that.
