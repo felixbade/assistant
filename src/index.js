@@ -1,3 +1,14 @@
+const parseHashParams = () => {
+    const hashParams = {}
+    const hash = window.location.hash.substring(1) // remove the #
+    const params = hash.split('&')
+    params.forEach(param => {
+        const [key, value] = param.split('=')
+        hashParams[decodeURIComponent(key)] = decodeURIComponent(value)
+    })
+    return hashParams
+}
+
 const chatCompletion = (apiKey, data) => {
     const endpoint = 'https://api.openai.com/v1/chat/completions'
     data.model = "gpt-3.5-turbo"
@@ -157,11 +168,8 @@ window.addEventListener('load', () => {
         }
     ]
 
-    const submitMessage = () => {
-        const input = document.querySelector('#prompt').value
-        document.querySelector('#prompt').value = ''
-
-        addSentMessage(input)
+    const sendMessage = (message) => {
+        addSentMessage(message)
         // scroll down always after sending message, even if wasn't before
         smoothScroll(document.body.scrollHeight, 500)
 
@@ -170,7 +178,7 @@ window.addEventListener('load', () => {
 
         messages.push({
             'role': 'user',
-            'content': input
+            'content': message
         })
 
         const apiKey = localStorage.getItem('api-key')
@@ -196,19 +204,31 @@ window.addEventListener('load', () => {
         })
     }
 
+    const hashParams = parseHashParams()
+    if ('q' in hashParams && hashParams.q) {
+        sendMessage(hashParams.q)
+    }
+
+    const submitMessageForm = () => {
+        const input = document.querySelector('#prompt').value
+        document.querySelector('#prompt').value = ''
+        sendMessage(input)
+    }
+
+
     const textbox = document.querySelector('#prompt')
 
     textbox.addEventListener('keydown', (event) => {
         if (event.code === 'Enter' && !event.ctrlKey && !event.altKey && !event.shiftKey) {
             event.preventDefault()
-            submitMessage()
+            submitMessageForm()
             updateTextareaSize(textbox)
         }
     })
 
     document.querySelector('form').addEventListener('submit', (event) => {
         event.preventDefault()
-        submitMessage()
+        submitMessageForm()
         updateTextareaSize(textbox)
     })
 
