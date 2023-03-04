@@ -25,7 +25,7 @@ I want to make this tool rock solid and ergonomic, but I can’t test all scenar
 - Please explain how it behaves, and how you would expect it to behave.
 - For UI bugs, please include a screenshot that contains the problem area (remember to hide your API key)
 - For errors, please include the error message
-- No bug is too small to report, because smaller bugs are often easier to fix.
+- No bug is too insignificant to report, because smaller bugs are often easier to fix.
 - Some bugs are debatable, but in general, if it makes you think ”oh, this doesn’t seem right”, it’s a bug.
 
 See [existing bug reports](https://github.com/felixbade/chatgpt-web-ui/issues?q=is%3Aissue+label%3Abug+) for inspiration.
