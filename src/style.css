@@ -1,5 +1,6 @@
 :root {
     --bg: white;
+    --compose-box-bg: hsl(0, 0%, 100%, 0.7);
     --fg: black;
     --my-message-bg: hsl(215, 90%, 50%);
     --my-message-fg: white;
@@ -42,7 +43,9 @@ body {
 }
 
 #compose-box {
-    background-color: var(--response-bg);
+    background-color: var(--compose-box-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     position: fixed;
     bottom: 0;
 
@@ -140,7 +143,7 @@ input[type=text], textarea {
     line-height: 120%;
     background-color: var(--bg);
     color: var(--fg);
-    border: 2px solid var(--input-border);
+    border: 1px solid var(--input-border);
     padding: 0.2em 0.5em;
     border-radius: 1em;
 }
@@ -171,6 +174,7 @@ button {
 @media (prefers-color-scheme: dark) {
     :root {
         --bg: hsl(215, 20%, 9%);
+        --compose-box-bg: hsl(215, 20%, 9%, 0.7);
         --fg: hsl(0, 0%, 95%);
         --my-message-bg: hsl(215, 75%, 48%);
         --my-message-fg: white;
