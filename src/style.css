@@ -64,8 +64,12 @@ body {
     padding: 0.3em 0.6em;
     flex: 1;
     margin: 0;
-    margin-right: 0.5em;
     max-height: 70vh;
+}
+
+#prompt-container {
+    flex: 1;
+    margin-right: 0.5em;
 }
 
 input {
@@ -145,6 +149,18 @@ input[type=text], textarea {
     border: 1px solid var(--input-border);
     padding: 0.2em 0.5em;
     border-radius: 1em;
+}
+
+.textarea-border-radius {
+    border-radius: 1em;
+    overflow: hidden;
+    display: flex;
+    border: 1px solid var(--input-border);
+}
+
+.textarea-border-radius > textarea {
+    margin: -1px !important;
+    border: none;
 }
 
 input[type=text]:focus, textarea:focus {
