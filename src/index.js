@@ -60,6 +60,7 @@ const addMessage = (message, type) => {
 
     const messageBubble = document.createElement('div')
     messageBubble.classList.add(`${type}-bubble`)
+    messageBubble.classList.add('message-bubble')
     messageBubble.innerHTML = renderMarkdown(message)
     messageContainer.appendChild(messageBubble)
 

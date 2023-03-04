@@ -77,32 +77,30 @@ input {
     flex-direction: column;
 }
 
-.response-bubble {
-    margin-top: 1em;
-    display: inline-block;
-
-    /* text bubble */
-    background-color: var(--response-bg);
-    color: var(--fg);
-    padding: 0.6em 0.8em;
-    border-radius: 0.9em;
-}
-
 .my-message-container {
     display: flex;
     align-items: end;
     flex-direction: column;
 }
 
-.my-message-bubble {
+.message-bubble {
     margin-top: 1em;
     display: inline-block;
+    padding-top: 0.5em;
+    padding-bottom: 0.55em;
+    padding-left: 0.8em;
+    padding-right: 0.8em;
+    border-radius: 1.0em;
+}
 
-    /* text bubble */
+.response-bubble {
+    background-color: var(--response-bg);
+    color: var(--fg);
+}
+
+.my-message-bubble {
     background-color: var(--my-message-bg);
     color: var(--my-message-fg);
-    padding: 0.6em 0.8em;
-    border-radius: 0.9em;
 }
 
 .copied-indicator {
