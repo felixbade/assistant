@@ -116,6 +116,10 @@ p {
     margin: 0;
 }
 
+code {
+    white-space: pre-wrap;
+}
+
 br {
     line-height: 200%;
 }
