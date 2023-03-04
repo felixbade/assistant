@@ -11,7 +11,6 @@ const chatCompletion = (apiKey, data) => {
         body: JSON.stringify(data)
     })
         .then(response => response.json())
-        .then(data => data.choices[0].message)
         .catch(error => {
             console.error('Error:', error)
         })
@@ -96,6 +95,19 @@ const addReceivedMessage = message => {
     return addMessage(message, 'response')
 }
 
+const addErrorMessage = (message, type) => {
+    const element = document.querySelector('#output')
+
+    const messageContainer = document.createElement('div')
+    messageContainer.classList.add(`${type}-container`)
+    messageContainer.classList.add('error')
+    element.appendChild(messageContainer)
+
+    messageContainer.innerText = message
+
+    return messageContainer
+}
+
 const smoothScroll = (targetPosition, duration) => {
     const currentPosition = window.pageYOffset
     const distance = targetPosition - currentPosition
@@ -169,11 +181,17 @@ window.addEventListener('load', () => {
 
         response.then(message => {
             typingIndicatorElement.remove()
-
-            messages.push(message)
-
             const wasScrolledToBottom = isScrolledToBottom()
-            addReceivedMessage(message.content)
+
+            if ('error' in message) {
+                addErrorMessage(message.error.message, 'assistant')
+
+            } else if ('choices' in message) {
+                message = message.choices[0].message
+                messages.push(message)
+                addReceivedMessage(message.content)
+            }
+
             if (wasScrolledToBottom) smoothScroll(document.body.scrollHeight, 500)
         })
     }

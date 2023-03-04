@@ -9,6 +9,7 @@
     --input-border: hsla(0, 0%, 0%, 20%);
     --info: hsl(120, 50%, 80%);
     --info-link: hsl(210, 100%, 30%);
+    --error-fg: hsl(5, 70%, 50%);
 
     --chat-max-width: 50em;
 }
@@ -108,6 +109,10 @@ input {
     color: var(--my-message-fg);
 }
 
+.error {
+    color: var(--error-fg);
+}
+
 .copied-indicator {
     font-size: 0.8em;
 }
@@ -202,6 +207,7 @@ button {
         --input-border: hsla(0, 0%, 90%, 40%);
         --info: hsl(130, 30%, 25%);
         --info-link: hsl(220, 100%, 85%);
+        --error-fg: hsl(5, 70%, 60%);
     }
 
     * {
