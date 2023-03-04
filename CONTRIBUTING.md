@@ -5,7 +5,7 @@ You found this page. Maybe you will also find bugs or missing features. You can 
 ## Philosophy
 - OpenAI has made the best chat AI API. This tools makes the best human-interface for that.
 - ”Getting started” UX is insanely important.
-- User ergonomy is insanely valuable.
+- User ergonomy is extremely valuable.
 - The user should be in control, not the platform.
 - New features need a UI, which is distracting to core features. New features must be more valuable than the clutter and complexity they are adding.
 - Let’s show the world just how much is possible with little.
