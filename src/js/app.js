@@ -103,8 +103,7 @@ window.addEventListener('load', () => {
         // scroll down always after sending message, even if wasn't before
         smoothScroll(document.body.scrollHeight, 500)
 
-        const dot = '&#x25CF;'
-        const typingIndicatorElement = addReceivedMessage(`${dot} ${dot} ${dot}`)
+        const typingIndicatorElement = addReceivedMessage('● ● ●')
 
         messages.push({
             'role': 'user',
