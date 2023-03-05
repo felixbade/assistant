@@ -98,8 +98,8 @@ window.addEventListener('load', () => {
 
     let messages = [
         {
-            "role": "system",
-            "content": "Response format is ALWAYS markdown, especially for code."
+            'role': 'system',
+            'content': 'Response format is ALWAYS markdown, especially for code.'
         }
     ]
 
@@ -167,7 +167,7 @@ window.addEventListener('load', () => {
         updateTextareaSize(textbox)
     })
 
-    textbox.addEventListener("input", () => {
+    textbox.addEventListener('input', () => {
         updateTextareaSize(textbox)
     })
     updateTextareaSize(textbox)

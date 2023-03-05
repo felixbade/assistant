@@ -1,6 +1,6 @@
 export const chatCompletion = (apiKey, data) => {
     const endpoint = 'https://api.openai.com/v1/chat/completions'
-    data.model = "gpt-3.5-turbo"
+    data.model = 'gpt-3.5-turbo'
 
     return fetch(endpoint, {
         method: 'POST',
