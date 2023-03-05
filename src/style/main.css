@@ -90,7 +90,7 @@ input {
 }
 
 .message-bubble {
-    margin-top: 1em;
+    margin-top: 0.6em;
     display: inline-block;
     padding-top: 0.5em;
     padding-bottom: 0.55em;
