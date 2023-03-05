@@ -9,7 +9,6 @@ Ask questions from Open AI’s ChatGPT `gpt-3.5-turbo` engine
 - Can be added to the phone’s home screen or installed on your computer as a Chrome app
 - Token-based cost, instead of flat 20$/mo
 - OpenAI’s API policy says your inputs won’t be used for developing, unlike in the playground
-- No word-by-word output throttling – get all text immediately after generation
 
 ## 🚚 In the future
 - Customize the assistant’s behind-the-scenes brief
