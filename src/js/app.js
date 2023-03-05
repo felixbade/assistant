@@ -6,31 +6,26 @@ import {
     updateTextareaSize
 } from './utils'
 
-const hideStartView = () => {
-    document.querySelector('#start-view').classList.add('hidden')
-}
-
-const showStartView = () => {
-    document.querySelector('#start-view').classList.remove('hidden')
-}
-
 const setupAPIKeyInput = () => {
+    const startView = document.querySelector('#start-view')
+
     const element = document.querySelector('#api-key')
     const savedAPIKey = localStorage.getItem('api-key') || ''
     element.value = savedAPIKey
+
     element.addEventListener('input', () => {
         const key = element.value
         console.log('saving:', key)
         localStorage.setItem('api-key', key)
         if (key) {
-            hideStartView()
+            startView.classList.add('hidden')
         } else {
-            showStartView()
+            startView.classList.remove('hidden')
         }
     })
 
     if (savedAPIKey) {
-        hideStartView()
+        startView.classList.add('hidden')
     }
 }
 
