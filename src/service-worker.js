@@ -1,4 +1,4 @@
-const CACHE_NAME = 'assistant-pwa-cache-1'
+const CACHE_NAME = 'assistant-pwa-cache-2'
 const urlsToCache = ['./index.html', './index.js', './style.css', './icon.png']
 
 // Install the service worker and cache assets
@@ -13,7 +13,8 @@ self.addEventListener('install', event => {
 self.addEventListener('fetch', event => {
     event.respondWith(
         caches.match(event.request)
-        .then(response => response || fetch(event.request))
+        .then(response => fetch(event.request))
+        // .then(response => response || fetch(event.request))
     )
 })
 
