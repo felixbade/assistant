@@ -148,7 +148,9 @@ window.addEventListener('load', () => {
     const textbox = document.querySelector('#prompt')
 
     textbox.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter' && !event.ctrlKey && !event.altKey && !event.shiftKey) {
+        // We need to use the deprecated event.keyCode here, because Chrome doesn't handle
+        // Chinise pinyin keyboard correctly
+        if (event.keyCode === 13 && !event.ctrlKey && !event.altKey && !event.shiftKey) {
             event.preventDefault()
             submitMessageForm()
             updateTextareaSize(textbox)
