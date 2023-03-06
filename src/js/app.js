@@ -148,6 +148,7 @@ window.addEventListener('load', () => {
     const submitMessageForm = () => {
         const input = document.querySelector('#prompt').value
         document.querySelector('#prompt').value = ''
+        updateTextareaSize(textbox)
         sendMessage(input)
     }
 
@@ -160,14 +161,12 @@ window.addEventListener('load', () => {
         if (event.keyCode === 13 && !event.ctrlKey && !event.altKey && !event.shiftKey) {
             event.preventDefault()
             submitMessageForm()
-            updateTextareaSize(textbox)
         }
     })
 
     document.querySelector('form').addEventListener('submit', (event) => {
         event.preventDefault()
         submitMessageForm()
-        updateTextareaSize(textbox)
     })
 
     textbox.addEventListener('input', () => {
