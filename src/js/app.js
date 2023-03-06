@@ -149,7 +149,7 @@ window.addEventListener('load', () => {
 
     textbox.addEventListener('keydown', (event) => {
         // We need to use the deprecated event.keyCode here, because Chrome doesn't handle
-        // Chinise pinyin keyboard correctly
+        // Chinese pinyin keyboard correctly
         if (event.keyCode === 13 && !event.ctrlKey && !event.altKey && !event.shiftKey) {
             event.preventDefault()
             submitMessageForm()
