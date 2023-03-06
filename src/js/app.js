@@ -5,7 +5,7 @@ import {
     isScrolledToBottom,
     updateTextareaSize
 } from './utils'
-import { renderMarkdownToElement } from './markdown'
+import { markdownToDocumentFragment } from './markdown'
 
 const setupAPIKeyInput = () => {
     const startView = document.querySelector('#start-view')
@@ -40,7 +40,7 @@ const addMessage = (message, type) => {
     const messageBubble = document.createElement('div')
     messageBubble.classList.add(`${type}-bubble`)
     messageBubble.classList.add('message-bubble')
-    messageBubble.appendChild(renderMarkdownToElement(message))
+    messageBubble.appendChild(markdownToDocumentFragment(message))
     messageContainer.appendChild(messageBubble)
 
     const copiedIndicator = document.createElement('span')

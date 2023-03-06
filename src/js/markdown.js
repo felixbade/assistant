@@ -2,7 +2,7 @@
 // returns: '<p>&amp; &lt; &amp;amp; <code>&amp; &lt; &amp;amp;</code></p>'
 // but as an element
 
-export const renderMarkdownToElement = md => {
+export const markdownToDocumentFragment = md => {
     // escape &<>
     md = md.replaceAll('&', '&amp;')
     md = md.replaceAll('<', '&lt;')
@@ -12,7 +12,7 @@ export const renderMarkdownToElement = md => {
     const html = DOMPurify.sanitize(marked.parse(md, {
         gfm: true
     }))
-    const element = htmlToElement(html)
+    const documentFragment = htmlToDocumentFragment(html)
 
     // marked also escapes &<>, but only in code blocks
     // now they are double-escaped
@@ -27,7 +27,7 @@ export const renderMarkdownToElement = md => {
     //
     // even then, the only problem would be if the user supplies already escaped &<> text,
     // it would be unescaped. no HTML elements created.
-    for (const code of element.querySelectorAll('code')) {
+    for (const code of documentFragment.querySelectorAll('code')) {
         code.innerText = code.innerText.replaceAll('&lt;', '<')
         code.innerText = code.innerText.replaceAll('&gt;', '>')
         code.innerText = code.innerText.replaceAll('&amp;', '&')
@@ -35,13 +35,11 @@ export const renderMarkdownToElement = md => {
 
     // since we are in the browser, it's more efficient to keep it as an element
     // instead of converting element -> html -> element later
-    return element
+    return documentFragment
 }
 
-// https://stackoverflow.com/questions/494143/creating-a-new-dom-element-from-an-html-string-using-built-in-dom-methods-or-pro/35385518#35385518
-const htmlToElement = html => {
+const htmlToDocumentFragment = html => {
     var template = document.createElement('template')
-    html = html.trim() // Never return a text node of whitespace as the result
     template.innerHTML = html
-    return template.content.firstChild
+    return template.content
 }
