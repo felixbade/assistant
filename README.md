@@ -5,10 +5,17 @@ https://assistant.bloat.app
 Ask questions from Open AI’s ChatGPT `gpt-3.5-turbo` engine
 
 ## 🤔 Why?
-- No more daily logouts from the playground - OpenAI API key is stored in `localStorage`
-- Can be added to the phone’s home screen or installed on your computer as a Chrome app
+
+### Compared to chat.openai.com
 - Token-based cost, instead of flat 20$/mo
-- OpenAI’s API policy says your inputs won’t be used for developing, unlike in the playground
+- No more logouts - OpenAI API key is stored in `localStorage`
+- Can be added to the phone’s home screen or installed on your computer as a Chrome app
+- OpenAI’s API policy says your prompts won’t be used for developing, unlike in the playground
+
+### Compared to many other ChatGPT wrappers
+- Requests go directly from the browser to OpenAI – no backend server
+- PWA support
+- Different UI design
 
 ## 🚚 In the future
 - Customize the assistant’s behind-the-scenes brief
