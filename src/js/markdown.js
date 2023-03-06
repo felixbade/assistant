@@ -1,3 +1,6 @@
+import { sanitize } from 'dompurify'
+import { parse } from 'marked'
+
 // renderMarkdown('& < &amp; `& < &amp;`')
 // returns: '<p>&amp; &lt; &amp;amp; <code>&amp; &lt; &amp;amp;</code></p>'
 // but as an element
@@ -9,7 +12,7 @@ export const markdownToDocumentFragment = md => {
     md = md.replaceAll('>', '&gt;')
 
     // markdown -> sanitized html -> element
-    const html = DOMPurify.sanitize(marked.parse(md, {
+    const html = sanitize(parse(md, {
         gfm: true
     }))
     const documentFragment = htmlToDocumentFragment(html)
