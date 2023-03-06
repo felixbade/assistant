@@ -88,6 +88,12 @@ const addErrorMessage = (message, type) => {
     return messageContainer
 }
 
+const removeErrorMessages = () => {
+    for (const errorMessage of document.querySelectorAll('.error')) {
+        errorMessage.remove()
+    }
+}
+
 window.addEventListener('load', () => {
     setupAPIKeyInput()
 
@@ -99,6 +105,7 @@ window.addEventListener('load', () => {
     ]
 
     const sendMessage = (message) => {
+        removeErrorMessages()
         addSentMessage(message)
         // scroll down always after sending message, even if wasn't before
         smoothScroll(document.body.scrollHeight, 500)
