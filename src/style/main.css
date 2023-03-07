@@ -132,6 +132,18 @@ p {
 
 code {
     white-space: pre-wrap;
+    border: 1px solid hsla(340, 50%, 50%, 0.10);
+    border-radius: 0.3em;
+    padding: 0.1em 0.3em;
+    color: hsl(340, 80%, 40%);
+    background-color: hsla(340, 50%, 50%, 0.04);
+}
+
+pre > code {
+    border: none;
+    padding: 0;
+    color: var(--fg);
+    background: none;
 }
 
 br {
