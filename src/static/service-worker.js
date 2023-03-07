@@ -1,5 +1,5 @@
 const CACHE_NAME = 'assistant-pwa-cache-2'
-const urlsToCache = ['./index.html', './index.js', './style.css', './icon.png']
+const urlsToCache = ['./index.html', './icon.png']
 
 // Install the service worker and cache assets
 self.addEventListener('install', event => {
