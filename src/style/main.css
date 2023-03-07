@@ -10,6 +10,8 @@
     --info: hsl(120, 50%, 80%);
     --info-link: hsl(210, 100%, 30%);
     --error-fg: hsl(5, 70%, 50%);
+    --code-bg: hsla(0, 0%, 0%, 0.04);
+    --code-border: hsla(0, 0%, 0%, 0.03);
 
     --chat-max-width: 50em;
 }
@@ -128,15 +130,15 @@ input {
 
 p {
     margin: 0;
+    line-height: 140%;
 }
 
 code {
     white-space: pre-wrap;
-    border: 1px solid hsla(340, 50%, 50%, 0.10);
-    border-radius: 0.3em;
-    padding: 0.1em 0.3em;
-    color: hsl(340, 80%, 40%);
-    background-color: hsla(340, 50%, 50%, 0.04);
+    border: 1px solid var(--code-border);
+    border-radius: 0.4em;
+    padding: 0.08em 0.25em;
+    background-color: var(--code-bg);
 }
 
 pre > code {
@@ -229,6 +231,8 @@ button {
         --info: hsl(130, 30%, 25%);
         --info-link: hsl(220, 100%, 85%);
         --error-fg: hsl(5, 70%, 60%);
+        --code-bg: hsla(0, 0%, 100%, 0.05);
+        --code-border: hsla(0, 0%, 100%, 0.05);
     }
 
     * {
