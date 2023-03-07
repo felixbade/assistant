@@ -1,4 +1,9 @@
-source .env
+if [ -z "$1" ]; then
+    echo "Usage: $0 <env-file>"
+    exit 1
+else
+    source $1
+fi
 
 HOST="$SSH_USER@$DOMAIN"
 

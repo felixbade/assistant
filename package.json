@@ -6,6 +6,9 @@
   "scripts": {
     "build:dev": "webpack --mode development",
     "build:prod": "webpack --mode production",
+    "deploy:staging": "./deploy.sh .env.staging",
+    "deploy:production": "./deploy.sh .env.production",
+    "staging": "npm run build:prod && npm run deploy:staging",
     "start": "npx webpack-dev-server --mode=development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

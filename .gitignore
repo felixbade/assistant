@@ -1,3 +1,5 @@
 .env
+.env.staging
+.env.production
 node_modules/
 dist/
