@@ -9,6 +9,7 @@
     "deploy:staging": "./deploy.sh .env.staging",
     "deploy:production": "./deploy.sh .env.production",
     "staging": "npm run build:prod && npm run deploy:staging",
+    "production": "npm run build:prod && npm run deploy:production",
     "start": "npx webpack-dev-server --mode=development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
