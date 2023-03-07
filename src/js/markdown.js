@@ -26,14 +26,10 @@ export const markdownToDocumentFragment = md => {
     //
     // if marked.parse didn't escape &<> for some reason,
     // like upgrading marked version later and forgetting about this function,
-    // it's not a security problem because we are working with innerText, not innerHTML
-    //
-    // even then, the only problem would be if the user supplies already escaped &<> text,
-    // it would be unescaped. no HTML elements created.
+    // it's not a security problem because we are not unescaping < and > in
+    // the innerHTML level
     for (const code of documentFragment.querySelectorAll('code')) {
-        code.innerText = code.innerText.replaceAll('&lt;', '<')
-        code.innerText = code.innerText.replaceAll('&gt;', '>')
-        code.innerText = code.innerText.replaceAll('&amp;', '&')
+        code.innerHTML = code.innerHTML.replaceAll('&amp;', '&')
     }
 
     // since we are in the browser, it's more efficient to keep it as an element
