@@ -19,7 +19,7 @@
 body {
     margin: 0;
     font-family: sans-serif;
-    line-height: 130%;
+    line-height: 135%;
     background-color: var(--bg);
     color: var(--fg);
     margin-bottom: calc(4em + env(safe-area-inset-bottom));
@@ -94,8 +94,8 @@ input {
 .message-bubble {
     margin-top: 0.6em;
     display: inline-block;
-    padding-top: 0.5em;
-    padding-bottom: 0.55em;
+    padding-top: 0.1em;
+    padding-bottom: 0.15em;
     padding-left: 0.8em;
     padding-right: 0.8em;
     border-radius: 1.0em;
@@ -129,8 +129,7 @@ input {
 }
 
 p {
-    margin: 0;
-    line-height: 140%;
+    margin: 0.5em 0;
 }
 
 code {
