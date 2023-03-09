@@ -145,7 +145,7 @@ window.addEventListener('load', () => {
                 if ('content' in delta) {
                     newMessage.content += delta.content
                     newMessageBubble.firstChild.innerHTML = ''
-                    newMessageBubble.firstChild.appendChild(markdownToDocumentFragment(newMessage.content))
+                    newMessageBubble.firstChild.appendChild(markdownToDocumentFragment(newMessage.content + '\n'))
                 }
             }
 
