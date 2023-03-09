@@ -99,6 +99,9 @@ input {
     padding-left: 0.8em;
     padding-right: 0.8em;
     border-radius: 1.0em;
+    max-width: 100%;
+    box-sizing: border-box;
+    word-wrap: break-word;
 }
 
 .response-bubble {
