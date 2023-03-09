@@ -1,4 +1,4 @@
-import { chatCompletion } from './api'
+import { chatCompletionStream } from './api'
 import {
     parseHashParams,
     smoothScroll,
@@ -119,21 +119,22 @@ window.addEventListener('load', () => {
 
         const apiKey = localStorage.getItem('api-key')
 
-        const response = chatCompletion(apiKey, {
+        const response = chatCompletionStream(apiKey, {
             messages
-        })
-
-        response.then(message => {
+        },
+        (response) => {
             typingIndicatorElement.remove()
             const wasScrolledToBottom = isScrolledToBottom()
 
-            if ('error' in message) {
-                addErrorMessage(message.error.message, 'assistant')
+            if ('error' in response) {
+                addErrorMessage(response.error.message, 'assistant')
 
-            } else if ('choices' in message) {
-                message = message.choices[0].message
-                messages.push(message)
-                addReceivedMessage(message.content)
+            } else if ('choices' in response) {
+                const delta = response.choices[0].delta
+                if ('content' in delta) {
+                    messages.push(delta)
+                    addReceivedMessage(delta.content)
+                }
             }
 
             if (wasScrolledToBottom) smoothScroll(document.body.scrollHeight, 500)
