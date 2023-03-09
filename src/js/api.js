@@ -48,7 +48,14 @@ export const chatCompletionStream = (apiKey, data, callback) => {
                     const content = line.replace('data: ', '')
                     if (!content) continue
                     if (content === '[DONE]') return
-                    const json = JSON.parse(content)
+                    let json
+                    try {
+                        json = JSON.parse(content)
+                    } catch (e) {
+                        // multi-line json?
+                        received = line + received
+                        continue
+                    }
 
                     callback(json)
                 }
