@@ -10,8 +10,10 @@
     --info: hsl(120, 50%, 80%);
     --info-link: hsl(210, 100%, 30%);
     --error-fg: hsl(5, 70%, 50%);
-    --code-bg: hsla(0, 0%, 0%, 0.04);
-    --code-border: hsla(0, 0%, 0%, 0.03);
+    --code-bg: hsla(0, 0%, 100%, 0.7);
+    --code-border: hsla(0, 0%, 0%, 0.15);
+    --my-message-code-bg: hsla(0, 0%, 0%, 0.2);
+    --my-message-code-border: hsla(0, 0%, 0%, 0.15);
 
     --chat-max-width: 50em;
 }
@@ -139,7 +141,7 @@ code {
     white-space: pre-wrap;
     border: 1px solid var(--code-border);
     border-radius: 0.4em;
-    padding: 0.08em 0.25em;
+    padding: 0.1em 0.3em;
     background-color: var(--code-bg);
 }
 
@@ -148,6 +150,29 @@ pre > code {
     padding: 0;
     color: var(--fg);
     background: none;
+}
+
+pre {
+    border: 1px solid var(--code-border);
+    border-radius: 0.5em;
+    padding: 0.5em 0.9em;
+    background-color: var(--code-bg);
+}
+
+.my-message-bubble code {
+    color: var(--my-message-fg);
+    border: 1px solid var(--my-message-code-border);
+    background-color: var(--my-message-code-bg);
+}
+
+.my-message-bubble pre > code {
+    border: none;
+    background: none;
+}
+
+.my-message-bubble pre {
+    border: 1px solid var(--my-message-code-border);
+    background-color: var(--my-message-code-bg);
 }
 
 br {
@@ -233,8 +258,10 @@ button {
         --info: hsl(130, 30%, 25%);
         --info-link: hsl(220, 100%, 85%);
         --error-fg: hsl(5, 70%, 60%);
-        --code-bg: hsla(0, 0%, 100%, 0.05);
-        --code-border: hsla(0, 0%, 100%, 0.05);
+        --code-bg: hsla(0, 0%, 0%, 0.25);
+        --code-border: hsla(0, 0%, 0%, 0.15);
+        --my-message-code-bg: hsla(0, 0%, 0%, 0.25);
+        --my-message-code-border: hsla(0, 0%, 0%, 0.15);
     }
 
     * {
