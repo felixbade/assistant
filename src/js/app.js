@@ -119,7 +119,10 @@ window.addEventListener('load', () => {
 
         const apiKey = localStorage.getItem('api-key')
 
-        const response = chatCompletionStream(apiKey, {
+        let newMessage = {}
+        let newMessageBubble = null
+
+        chatCompletionStream(apiKey, {
             messages
         },
         (response) => {
@@ -131,9 +134,18 @@ window.addEventListener('load', () => {
 
             } else if ('choices' in response) {
                 const delta = response.choices[0].delta
+                if ('role' in delta) {
+                    newMessage = {
+                        'role': delta.role,
+                        'content': ''
+                    }
+                    messages.push(newMessage)
+                    newMessageBubble = addReceivedMessage(newMessage.content)
+                }
                 if ('content' in delta) {
-                    messages.push(delta)
-                    addReceivedMessage(delta.content)
+                    newMessage.content += delta.content
+                    newMessageBubble.firstChild.innerHTML = ''
+                    newMessageBubble.firstChild.appendChild(markdownToDocumentFragment(newMessage.content))
                 }
             }
 
