@@ -38,7 +38,8 @@ export const chatCompletionStream = (apiKey, data, callback) => {
                 if (done) {
                     return
                 }
-                received += String.fromCharCode.apply(null, value)
+                const decoder = new TextDecoder('utf-8')
+                received += decoder.decode(value)
 
                 while (received.indexOf('\n') !== -1) {
                     const index = received.indexOf('\n')
