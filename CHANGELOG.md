@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.1] - 2023-03-12
+
+### Fixed
+
+- Layout with devices that have a notch ([#58](https://github.com/felixbade/chatgpt-web-ui/issues/58)).
+
 ## [1.1.0] - 2023-03-12
 
 ### Added
