@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.4] – 2023-03-12
+
+### Changed
+
+- Improved PWA caching with Workbox – all files come from cache by default, but update in the background ([#63](https://github.com/felixbade/chatgpt-web-ui/issues/63)).
+
+### Fixed
+
+- ”Start by getting an API key” no longer flashes on page refresh ([#63](https://github.com/felixbade/chatgpt-web-ui/issues/63)).
+
 ## [1.1.3] – 2023-03-12
 
 ### Fixed
