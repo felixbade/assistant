@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.3] – 2023-03-12
+
+### Fixed
+
+- iOS Safari: text is no longer incorrectly zooming when the phone is in landscape orientation ([#59](https://github.com/felixbade/chatgpt-web-ui/issues/59)).
+
 ## [1.1.2] – 2023-03-12
 
 ### Fixed

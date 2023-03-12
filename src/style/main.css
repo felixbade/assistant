@@ -18,6 +18,10 @@
     --chat-max-width: 50em;
 }
 
+html {
+    -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape while allowing user zoom */
+}
+
 body {
     margin: 0;
     font-family: sans-serif;
