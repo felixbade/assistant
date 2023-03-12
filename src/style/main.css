@@ -177,6 +177,10 @@ pre {
     background-color: var(--my-message-code-bg);
 }
 
+.message-bubble img {
+    width: 100%;
+}
+
 br {
     line-height: 200%;
 }

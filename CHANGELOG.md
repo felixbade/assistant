@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.2] – 2023-03-12
+
+### Fixed
+
+- Images no longer expand outside the message bubble ([#62](https://github.com/felixbade/chatgpt-web-ui/issues/62)).
+
 ## [1.1.1] – 2023-03-12
 
 ### Fixed
