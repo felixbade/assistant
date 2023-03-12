@@ -9,28 +9,6 @@ export const parseHashParams = () => {
     return hashParams
 }
 
-export const smoothScroll = (targetPosition, duration) => {
-    const currentPosition = window.pageYOffset
-    const distance = targetPosition - currentPosition
-    const startTime = performance.now()
-
-    const easeInOutQuad = (t, b, c, d) => {
-        t /= d / 2
-        if (t < 1) return (c / 2) * t * t + b
-        t--
-        return (-c / 2) * (t * (t - 2) - 1) + b
-    }
-
-    const animationCallback = (time) => {
-        const elapsedTime = time - startTime
-        const scroll = easeInOutQuad(elapsedTime, currentPosition, distance, duration)
-        window.scrollTo(0, scroll)
-        if (elapsedTime < duration) requestAnimationFrame(animationCallback)
-    }
-
-    requestAnimationFrame(animationCallback)
-}
-
 export const isScrolledToBottom = () => {
     const { scrollTop, clientHeight, scrollHeight } = document.documentElement
     return scrollTop + clientHeight >= scrollHeight

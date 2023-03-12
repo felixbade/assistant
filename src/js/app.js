@@ -1,7 +1,6 @@
 import { chatCompletionStream } from './api'
 import {
     parseHashParams,
-    smoothScroll,
     isScrolledToBottom,
     updateTextareaSize
 } from './utils'
@@ -107,10 +106,11 @@ window.addEventListener('load', () => {
     const sendMessage = (message) => {
         removeErrorMessages()
         addSentMessage(message)
-        // scroll down always after sending message, even if wasn't before
-        smoothScroll(document.body.scrollHeight, 500)
 
         const typingIndicatorElement = addReceivedMessage('● ● ●')
+
+        // scroll down always after sending message, even if wasn't before
+        document.body.scrollIntoView({ block: 'end', behavior: 'smooth' })
 
         messages.push({
             'role': 'user',
@@ -149,7 +149,10 @@ window.addEventListener('load', () => {
                 }
             }
 
-            if (wasScrolledToBottom) smoothScroll(document.body.scrollHeight, 500)
+            if (wasScrolledToBottom) {
+                // Instant, non-smooth scroll
+                window.scrollTo(0, document.body.scrollHeight)
+            }
         })
     }
 
