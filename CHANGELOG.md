@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Streaming responses (#45).
+- Streaming responses ([#45](https://github.com/felixbade/chatgpt-web-ui/issues/45)).
 
 ### Changed
 
@@ -19,13 +19,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Ordering of responses when multiple questions are sent before a response is received (#47).
+- Ordering of responses when multiple questions are sent before a response is received ([#47](https://github.com/felixbade/chatgpt-web-ui/issues/47)).
 
 ## [1.0.4] - 2023-03-09
 
 ### Added
 
-- Link to API usage page (#8).
+- Link to API usage page ([#8](https://github.com/felixbade/chatgpt-web-ui/issues/8)).
 
 ## [1.0.3] - 2023-03-09
 
@@ -42,13 +42,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Multi-line code block rendering (#55).
+- Multi-line code block rendering ([#55](https://github.com/felixbade/chatgpt-web-ui/issues/55)).
 
 ## [1.0.1] - 2023-03-07
 
 ### Fixed
 
-- PWA error due to incorrect cacheable files list (#56).
+- PWA error due to incorrect cacheable files list ([#56](https://github.com/felixbade/chatgpt-web-ui/issues/56)).
 
 ## [1.0.0] - 2023-03-07
 
