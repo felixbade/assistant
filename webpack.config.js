@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { GenerateSW } = require('workbox-webpack-plugin');
 
 module.exports = (env) => {
     return {
@@ -30,6 +31,18 @@ module.exports = (env) => {
                 patterns: [
                     { from: 'src/static', to: '' },
                 ],
+            }),
+            new GenerateSW({
+                clientsClaim: true,
+                skipWaiting: true,
+                runtimeCaching: [{
+                    // match everything
+                    urlPattern: /$/,
+
+                    // return a cached response immediately
+                    // but always update the content in the background
+                    handler: 'StaleWhileRevalidate',
+                }],
             }),
         ],
         module: {
