@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.5] – 2023-03-12
+
+### Fixed
+
+- Scrolling to the bottom of the page on new message ([#61](https://github.com/felixbade/chatgpt-web-ui/issues/61)).
+
 ## [1.1.4] – 2023-03-12
 
 ### Changed

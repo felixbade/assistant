@@ -28,7 +28,7 @@ body {
     line-height: 135%;
     background-color: var(--bg);
     color: var(--fg);
-    margin-bottom: calc(4em + env(safe-area-inset-bottom));
+    padding-bottom: calc(4em + env(safe-area-inset-bottom));
     padding-left: env(safe-area-inset-left);
     padding-right: env(safe-area-inset-right);
 }
