@@ -4,6 +4,8 @@ https://assistant.bloat.app
 
 Ask questions from Open AI’s ChatGPT `gpt-3.5-turbo` engine
 
+See [`CHANGELOG.md`](CHANGELOG.md) for what’s new.
+
 ## 🤔 Why?
 
 ### Compared to chat.openai.com
