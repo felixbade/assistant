@@ -26,6 +26,8 @@ const setupAPIKeyInput = () => {
 
     if (savedAPIKey) {
         startView.classList.add('hidden')
+    } else {
+        startView.classList.remove('hidden')
     }
 }
 
