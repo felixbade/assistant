@@ -251,6 +251,29 @@ button {
     margin: 0;
 }
 
+select {
+    font-family: -apple-system, sans-serif;
+    line-height: 120%;
+    background-color: var(--bg);
+    color: var(--fg);
+    border: 1px solid var(--input-border);
+    padding: 0.2em 0.5em;
+    border-radius: 1em;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 7'><path fill='%23666666' d='M5 6.8s-.1 0 0 0c-.1 0-.1 0 0 0L1 2.8 2.2 1.6 5 4.4 7.8 1.6 9 2.8z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 0.5em center;
+    background-size: 14px;
+    padding-right: 2em;
+    margin: 0.4em 0;
+}
+
+select:focus {
+    outline: none;
+}
+
 .hidden {
     display: none !important;
 }
