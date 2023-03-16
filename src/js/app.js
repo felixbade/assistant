@@ -31,6 +31,11 @@ const setupAPIKeyInput = () => {
     }
 }
 
+const getUserSelectedModel = () => {
+    const modelSelect = document.querySelector('#model-select')
+    return modelSelect.options[modelSelect.selectedIndex].value
+}
+
 const addMessage = (message, type) => {
     const element = document.querySelector('#output')
 
@@ -120,12 +125,14 @@ window.addEventListener('load', () => {
         })
 
         const apiKey = localStorage.getItem('api-key')
+        const model = getUserSelectedModel()
 
         let newMessage = {}
         let newMessageBubble = null
 
         chatCompletionStream(apiKey, {
-            messages
+            messages,
+            model
         },
         (response) => {
             typingIndicatorElement.remove()
