@@ -36,6 +36,56 @@ const getUserSelectedModel = () => {
     return modelSelect.options[modelSelect.selectedIndex].value
 }
 
+
+let mouseDown = false
+let hasSelectedText = false
+
+document.addEventListener('mousedown', () => {
+    mouseDown = true
+    hasSelectedText = false
+})
+
+document.addEventListener('mousemove', () => {
+    if (mouseDown && window.getSelection().toString().length > 0) {
+        hasSelectedText = true
+    }
+})
+
+document.addEventListener('mouseup', () => {
+    mouseDown = false
+})
+
+let timeoutInterval = null
+const showNotification = text => {
+    let notification = document.querySelector('#notification')
+    notification.className = 'notification show'
+    notification.innerText = text
+    if (timeoutInterval) {
+        clearInterval(timeoutInterval)
+    }
+    timeoutInterval = setTimeout(() => {
+        notification.className = "notification"
+    }, 4000)
+}
+
+const injectCopyEventListeners = fragment => {
+    for (const code of fragment.querySelectorAll('code, pre')) {
+        code.addEventListener('click', event => {
+            if (hasSelectedText) {
+                return
+            }
+            event.stopPropagation()
+            navigator.clipboard.writeText(code.innerText)
+            .then(() => {
+                showNotification('Copied!')
+            })
+            .catch((error) => {
+                showNotification('Error copying text to clipboard:', error)
+            })
+        })
+    }
+}
+
 const addMessage = (message, type) => {
     const element = document.querySelector('#output')
 
@@ -46,32 +96,24 @@ const addMessage = (message, type) => {
     const messageBubble = document.createElement('div')
     messageBubble.classList.add(`${type}-bubble`)
     messageBubble.classList.add('message-bubble')
-    messageBubble.appendChild(markdownToDocumentFragment(message))
+    const fragment = markdownToDocumentFragment(message)
+    injectCopyEventListeners(fragment)
+    messageBubble.appendChild(fragment)
     messageContainer.appendChild(messageBubble)
 
     const copiedIndicator = document.createElement('span')
     copiedIndicator.classList.add('copied-indicator')
     messageContainer.appendChild(copiedIndicator)
 
-    messageBubble.addEventListener('click', () => {
-        navigator.clipboard.writeText(message)
-        .then(() => {
-            copiedIndicator.innerText = 'Copied!'
-        })
-        .catch((error) => {
-            alert('Error copying text to clipboard:', error)
-        })
-    })
-
-    window.addEventListener('click', () => {
-        const oldCopiedIndicators = document.querySelectorAll('.copied-indicator')
-        for (const indicator of oldCopiedIndicators) {
-            indicator.innerText = ''
-        }
-    })
-
     return messageContainer
 }
+
+window.addEventListener('click', () => {
+    const oldCopiedIndicators = document.querySelectorAll('.copied-indicator')
+    for (const indicator of oldCopiedIndicators) {
+        indicator.innerText = ''
+    }
+})
 
 const addSentMessage = message => {
     return addMessage(message, 'my-message')
@@ -154,7 +196,10 @@ window.addEventListener('load', () => {
                 if ('content' in delta) {
                     newMessage.content += delta.content
                     newMessageBubble.firstChild.innerHTML = ''
-                    newMessageBubble.firstChild.appendChild(markdownToDocumentFragment(newMessage.content + '\n'))
+
+                    const fragment = markdownToDocumentFragment(newMessage.content + '\n')
+                    injectCopyEventListeners(fragment)
+                    newMessageBubble.firstChild.appendChild(fragment)
                 }
             }
 

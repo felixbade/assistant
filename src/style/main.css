@@ -165,6 +165,10 @@ pre {
     background-color: var(--code-bg);
 }
 
+pre, code {
+    cursor: pointer;
+}
+
 .my-message-bubble code {
     color: var(--my-message-fg);
     border: 1px solid var(--my-message-code-border);
@@ -278,6 +282,40 @@ select:focus {
 .hidden {
     display: none !important;
 }
+
+
+.notification {
+    visibility: hidden;
+    min-width: 100px;
+    margin-left: -50px;
+    box-sizing: border-box;
+    background-color: var(--fg);
+    color: var(--bg);
+    text-align: center;
+    border-radius: 1em;
+    padding: 0.8em;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    top: 1.5em;
+    font-size: 1em;
+}
+
+.show {
+    visibility: visible !important;
+    animation: fadein 0.35s ease, fadeout 0.5s ease 3.65s;
+}
+
+@keyframes fadein {
+    from {top: 0; opacity: 0;}
+    to {top: 1.5em; opacity: 1;}
+}
+
+@keyframes fadeout {
+    from {top: 1.5em; opacity: 1;}
+    to {top: 0; opacity: 0;}
+}
+
 
 @media (prefers-color-scheme: dark) {
     :root {
