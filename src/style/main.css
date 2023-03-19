@@ -79,13 +79,14 @@ body {
 }
 
 
-#intro-view {
+.full-window-overlay {
     position: absolute;
     box-sizing: border-box;
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
     padding-left: calc(max((100vw - var(--chat-max-width))/2, 0.9em));
     padding-right: calc(max((100vw - var(--chat-max-width))/2, 0.9em));
+    padding-bottom: calc(0.8em + env(safe-area-inset-bottom));
     z-index: 2;
     background-color: var(--compose-box-bg);
     backdrop-filter: blur(8px);
