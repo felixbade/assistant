@@ -185,6 +185,17 @@ pre, code {
     background-color: var(--my-message-code-bg);
 }
 
+table {
+    border-collapse: collapse;
+    margin: 1em 0;
+    background-color: var(--code-bg);
+}
+
+table th, table td {
+    border: 1px solid var(--code-border);
+    padding: 0.4em 0.7em;
+}
+
 .message-bubble img {
     width: 100%;
 }
