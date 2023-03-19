@@ -91,6 +91,17 @@ body {
     -webkit-backdrop-filter: blur(8px); /* Needed for Safari in 2023 */
 }
 
+.assistant-icon-container {
+    text-align: center;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.assistant-icon {
+    width: 7em;
+    border-radius: 1.5em;
+}
+
 .start-view {
     background-color: var(--info);
     padding: 1em;
