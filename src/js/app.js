@@ -243,4 +243,22 @@ window.addEventListener('load', () => {
         updateTextareaSize(textbox)
     })
     updateTextareaSize(textbox)
+
+
+    document.addEventListener('keydown', event => {
+        if (event.ctrlKey && event.key.toLowerCase() === 'm') {
+            rotateSelectValue('model-select')
+        }
+    })
+
+    const rotateSelectValue = selectId => {
+        const select = document.querySelector(`#${selectId}`)
+
+        if (select.selectedIndex < select.options.length - 1) {
+            select.selectedIndex++
+        } else {
+            select.selectedIndex = 0
+        }
+    }
+
 })
