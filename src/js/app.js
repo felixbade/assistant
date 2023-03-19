@@ -73,6 +73,21 @@ const setupIntroViewHandlers = () => {
     })
 }
 
+const setupSettingsHandlers = () => {
+    const settingsView = document.querySelector('#settings-view')
+    const settingsButton = document.querySelector('#settings-button')
+    const settingsExitButton = document.querySelector('#settings-exit-button')
+
+    settingsButton.addEventListener('click', () => {
+        settingsView.classList.remove('hidden')
+    })
+
+    settingsExitButton.addEventListener('click', () => {
+        settingsView.classList.add('hidden')
+    })
+}
+
+
 const getUserSelectedModel = () => {
     const modelSelect = document.querySelector('#model-select')
     return modelSelect.options[modelSelect.selectedIndex].value
@@ -187,6 +202,7 @@ const removeErrorMessages = () => {
 window.addEventListener('load', () => {
     setupAPIKeyInput()
     setupIntroViewHandlers()
+    setupSettingsHandlers()
 
     let messages = [
         {

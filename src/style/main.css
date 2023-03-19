@@ -43,12 +43,12 @@ body {
     margin-bottom: calc(4em + env(safe-area-inset-bottom));
 }
 
-#settings-button {
+#settings-button, #settings-exit-button {
     float: right;
     margin-right: -0.1em;
 }
 
-#settings-button:hover {
+#settings-button:hover, #settings-exit-button:hover {
     opacity: 80%;
     cursor: pointer;
 }
@@ -84,9 +84,10 @@ body {
     box-sizing: border-box;
     min-height: 100vh;
     width: 100%;
-    padding-left: calc(max((100vw - var(--chat-max-width))/2, 0.9em));
-    padding-right: calc(max((100vw - var(--chat-max-width))/2, 0.9em));
+    padding-left: calc(max((100vw - var(--chat-max-width))/2, 1em));
+    padding-right: calc(max((100vw - var(--chat-max-width))/2, 1em));
     padding-bottom: calc(0.8em + env(safe-area-inset-bottom));
+    padding-top: 0.7em;
     z-index: 2;
     background-color: var(--compose-box-bg);
     backdrop-filter: blur(8px);
@@ -379,7 +380,6 @@ select {
     background-position: right 0.5em center;
     background-size: 14px;
     padding-right: 2em;
-    margin-top: 0.4em;
     font-size: 1em;
 }
 

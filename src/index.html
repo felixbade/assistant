@@ -20,6 +20,11 @@
                 <circle cx="55.0" cy="55.0" r="17.5" fill="none" stroke="var(--settings-icon-border)" stroke-width="5.3" />
             </symbol>
         </svg>
+        <svg style="display:none;">
+            <symbol id="x-icon" viewBox="-20.0 -20.0 240.0 240.0">
+                <path stroke="var(--settings-icon-border)" stroke-width="20.0" fill="none" d="M20,20 L180.0,180.0 M20,180.0 L180.0,20"/>
+            </symbol>
+        </svg>
 
         <div id="intro-view" class="full-window-overlay hidden">
             <div class="assistant-icon-container">
@@ -50,20 +55,17 @@
             <button id="intro-continue" class="secondary">Continue</button>
         </div>
 
-        <div class="container">
-            <button id="settings-button" class="reset-button">
-                <svg class="settings-icon" style="width:25px; height:25px">
-                    <use xlink:href="#settings-icon"></use>
+        <div id="settings-view" class="full-window-overlay hidden">
+            <button id="settings-exit-button" class="reset-button">
+                <svg style="width:25px; height:25px">
+                    <use xlink:href="#x-icon"></use>
                 </svg>
             </button>
+            <h1>Settings</h1>
 
             OpenAI API key:
             <input type="text" class="api-key-input" placeholder="sk-xxxx">
-            <div class="disclaimer">The API key is only sent to Open AI directly. It is saved to your browser's localStorage.</div>
-            <select id="model-select">
-                <option value="gpt-3.5-turbo">GPT-3.5</option>
-                <option value="gpt-4">GPT-4</option>
-            </select>
+
             <footer>
                 <a href="https://platform.openai.com/account/usage" target="_blank">Your usage</a>
                 &middot;
@@ -73,6 +75,18 @@
                 &middot;
                 Version <span id="version"><%= htmlWebpackPlugin.options.version %></span>
             </footer>
+        </div>
+
+        <div class="container">
+            <button id="settings-button" class="reset-button">
+                <svg style="width:25px; height:25px">
+                    <use xlink:href="#settings-icon"></use>
+                </svg>
+            </button>
+            <select id="model-select">
+                <option value="gpt-3.5-turbo">GPT-3.5</option>
+                <option value="gpt-4">GPT-4</option>
+            </select>
             <div id="notification" class="notification"></div>
             <div id="output"></div>
         </div>
