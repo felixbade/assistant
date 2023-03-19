@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0] – 2023-03-19
+
+### Added
+
+- Favicon ([#26](https://github.com/felixbade/chatgpt-web-ui/issues/26)).
+- Proper styling for tables ([#65](https://github.com/felixbade/chatgpt-web-ui/issues/65), [#71](https://github.com/felixbade/chatgpt-web-ui/issues/71)).
+- Model changing (GPT-3.5 / GPT-4) with ctrl+M.
+
+### Changed
+
+- Copy with click now copies code blocks, not whole messages ([#29](https://github.com/felixbade/chatgpt-web-ui/issues/29)).
+
+## [1.2.0] – 2023-03-16
+
+### Added
+
+- Support for GPT-4 via dropdown. GPT-3.5 is also supported. ([#67](https://github.com/felixbade/chatgpt-web-ui/issues/67))
+
+
 ## [1.1.5] – 2023-03-12
 
 ### Fixed
