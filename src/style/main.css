@@ -349,6 +349,12 @@ button {
     border-radius: 19px;
     font-size: 1em;
     margin: 0;
+    font-weight: 500;
+}
+
+button.secondary {
+    background-color: var(--response-bg);
+    color: var(--fg);
 }
 
 select {
