@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Intro view on page load if API key is not set ([#9](https://github.com/felixbade/chatgpt-web-ui/issues/9)).
+
 ## [1.3.1] – 2023-03-19
 
 ### Fixed
