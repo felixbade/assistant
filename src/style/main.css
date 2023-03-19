@@ -11,6 +11,7 @@
     --info: hsl(120, 50%, 80%);
     --info-link: hsl(210, 100%, 30%);
     --error-fg: hsl(5, 70%, 50%);
+    --success-fg: hsl(140, 70%, 30%);
     --code-bg: hsla(0, 0%, 100%, 0.7);
     --code-border: hsla(0, 0%, 0%, 0.15);
     --my-message-code-bg: hsla(0, 0%, 0%, 0.2);
@@ -197,6 +198,10 @@ input {
 
 .error {
     color: var(--error-fg);
+}
+
+.success {
+    color: var(--success-fg);
 }
 
 .copied-indicator {
@@ -433,6 +438,7 @@ select:focus {
         --info: hsl(130, 30%, 25%);
         --info-link: hsl(220, 100%, 85%);
         --error-fg: hsl(5, 70%, 60%);
+        --success-fg: hsl(140, 70%, 45%);
         --code-bg: hsla(0, 0%, 0%, 0.25);
         --code-border: hsla(0, 0%, 0%, 0.15);
         --my-message-code-bg: hsla(0, 0%, 0%, 0.25);

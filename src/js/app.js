@@ -1,4 +1,4 @@
-import { chatCompletionStream } from './api'
+import { chatCompletionStream, getModels } from './api'
 import {
     parseHashParams,
     isScrolledToBottom,
@@ -35,7 +35,42 @@ const setupAPIKeyInput = () => {
 }
 
 const setupIntroViewHandlers = () => {
+    const statusElement = document.querySelector('#intro-api-key-status')
+    const apiKeyElement = document.querySelector('#intro-api-key-input')
+    const continueElement = document.querySelector('#intro-continue')
 
+    apiKeyElement.addEventListener('input', () => {
+        statusElement.classList.remove('error')
+        statusElement.classList.remove('success')
+        continueElement.classList.add('secondary')
+
+        const apiKey = apiKeyElement.value
+        if (!apiKey) {
+            statusElement.innerText = ''
+            return
+        }
+
+        statusElement.innerText = 'Checking...'
+
+        const models = getModels(apiKey)
+        models.then(response => {
+            if (response.error) {
+                statusElement.classList.add('error')
+                if (response.error.code === 'invalid_api_key') {
+                    statusElement.innerText = 'This API key doesn’t work.'
+                } else {
+                    statusElement.innerText = 'There was an error when checking the API key.'
+                }
+            } else {
+                statusElement.innerText = 'This API key is working!'
+                statusElement.classList.add('success')
+                continueElement.classList.remove('secondary')
+            }
+        }, error => {
+            statusElement.innerText = 'There was an error when checking the API key.'
+            statusElement.classList.add('error')
+        })
+    })
 }
 
 const getUserSelectedModel = () => {

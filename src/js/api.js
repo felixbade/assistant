@@ -1,3 +1,16 @@
+export const getModels = (apiKey) => {
+    const endpoint = 'https://api.openai.com/v1/models'
+
+    return fetch(endpoint, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}`
+        }
+    })
+    .then(response => response.json())
+}
+
 export const chatCompletion = (apiKey, data) => {
     const endpoint = 'https://api.openai.com/v1/chat/completions'
 
