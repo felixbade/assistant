@@ -7,6 +7,7 @@
     --response-bg: hsl(0, 0%, 91%);
     --link: hsl(215, 100%, 45%);
     --input-border: hsla(0, 0%, 0%, 20%);
+    --settings-icon-border: hsla(0, 0%, 0%, 40%);
     --info: hsl(120, 50%, 80%);
     --info-link: hsl(210, 100%, 30%);
     --error-fg: hsl(5, 70%, 50%);
@@ -410,6 +411,7 @@ select:focus {
         --response-bg: hsl(215, 15%, 20%);
         --link: hsl(215, 100%, 65%);
         --input-border: hsla(0, 0%, 90%, 40%);
+        --settings-icon-border: hsla(0, 0%, 100%, 50%);
         --info: hsl(130, 30%, 25%);
         --info-link: hsl(220, 100%, 85%);
         --error-fg: hsl(5, 70%, 60%);
