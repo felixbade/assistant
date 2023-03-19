@@ -29,15 +29,16 @@ body {
     line-height: 135%;
     background-color: var(--bg);
     color: var(--fg);
-    padding-bottom: calc(4em + env(safe-area-inset-bottom));
-    padding-left: env(safe-area-inset-left);
-    padding-right: env(safe-area-inset-right);
+    display: flex;
+    justify-content: center;
 }
 
 .container {
-    max-width: var(--chat-max-width);
-    margin: 0 auto;
+    width: var(--chat-max-width);
     padding: 0.7em 1em;
+    margin-left: env(safe-area-inset-left);
+    margin-right: env(safe-area-inset-right);
+    margin-bottom: calc(4em + env(safe-area-inset-bottom));
 }
 
 #start-view {
@@ -61,11 +62,12 @@ body {
     position: fixed;
     bottom: 0;
 
+    width: 100%;
+    box-sizing: border-box;
     padding: 0.9em;
-    width: calc(100% - 1.8em - env(safe-area-inset-left) - env(safe-area-inset-right));
-    max-width: var(--chat-max-width);
+    padding-left: calc(max(0.9em + env(safe-area-inset-left), (100% - var(--chat-max-width))/2));
+    padding-right: calc(max(0.9em + env(safe-area-inset-right), (100% - var(--chat-max-width))/2));
     padding-bottom: calc(0.8em + env(safe-area-inset-bottom));
-    margin-left: -1em;
 
     display: flex;
     justify-content: space-between;
