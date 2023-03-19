@@ -2,7 +2,7 @@
 
 https://assistant.bloat.app
 
-Ask questions from Open AI’s ChatGPT `gpt-3.5-turbo` engine
+Ask questions from Open AI’s ChatGPT `gpt-3.5-turbo` engine.
 
 See [`CHANGELOG.md`](CHANGELOG.md) for what’s new.
 
@@ -25,7 +25,8 @@ See [`CHANGELOG.md`](CHANGELOG.md) for what’s new.
 - Speak your messages using the Whisper API
 
 ## 👀 Hidden features
-You can open the assistant with an initial prompt if you want to make integrations into other apps. Example: [https://assistant.bloat.app/#q=hello%20there](https://assistant.bloat.app/#q=hello%20there)
+- You can open the assistant with an initial prompt if you want to make integrations into other apps. Example: [https://assistant.bloat.app/#q=hello%20there](https://assistant.bloat.app/#q=hello%20there).
+- You can change the model with ctrl+M.
 
 ## 💙 Contributing
 The best way to contribute is by adding feature requests and bug reports to the GitHub [issues](https://github.com/felixbade/chatgpt-web-ui/issues) – you don’t need to be a programmer for that. See [`CONTRIBUTING.md`](CONTRIBUTING.md) for details.
