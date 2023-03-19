@@ -41,7 +41,19 @@ body {
     margin-bottom: calc(4em + env(safe-area-inset-bottom));
 }
 
-#start-view {
+#intro-view {
+    position: absolute;
+    box-sizing: border-box;
+    height: 100vh;
+    width: 100%;
+    padding-left: calc(max((100vw - var(--chat-max-width))/2, 0.9em));
+    padding-right: calc(max((100vw - var(--chat-max-width))/2, 0.9em));
+    z-index: 2;
+    background-color: var(--compose-box-bg);
+    backdrop-filter: blur(8px);
+}
+
+.start-view {
     background-color: var(--info);
     padding: 1em;
     border-radius: 1em;
@@ -50,7 +62,7 @@ body {
     font-size: 1.1em;
 }
 
-#start-view a {
+.start-view a, .start-view a:visited {
     color: var(--info-link);
     text-decoration: underline;
 }
@@ -58,7 +70,6 @@ body {
 #compose-box {
     background-color: var(--compose-box-bg);
     backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
     position: fixed;
     bottom: 0;
 

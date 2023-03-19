@@ -7,28 +7,35 @@ import {
 import { markdownToDocumentFragment } from './markdown'
 
 const setupAPIKeyInput = () => {
-    const startView = document.querySelector('#start-view')
-
-    const element = document.querySelector('#api-key')
+    const apiKeyElements = document.querySelectorAll('.api-key-input')
     const savedAPIKey = localStorage.getItem('api-key') || ''
-    element.value = savedAPIKey
+    console.log('savedapikey:', savedAPIKey)
 
-    element.addEventListener('input', () => {
-        const key = element.value
-        console.log('saving:', key)
-        localStorage.setItem('api-key', key)
-        if (key) {
-            startView.classList.add('hidden')
-        } else {
-            startView.classList.remove('hidden')
-        }
-    })
+    for (const apiKeyElement of apiKeyElements) {
+        apiKeyElement.value = savedAPIKey
 
-    if (savedAPIKey) {
-        startView.classList.add('hidden')
-    } else {
-        startView.classList.remove('hidden')
+        apiKeyElement.addEventListener('input', () => {
+            const key = apiKeyElement.value
+            console.log('saving:', key)
+            localStorage.setItem('api-key', key)
+            for (const otherApiKeyElement of apiKeyElements) {
+                otherApiKeyElement.value = key
+            }
+        })
     }
+
+    const introView = document.querySelector('#intro-view')
+    if (!savedAPIKey) {
+        introView.classList.remove('hidden')
+    }
+
+    document.querySelector('#intro-continue').addEventListener('click', () => {
+        introView.classList.add('hidden')
+    })
+}
+
+const setupIntroViewHandlers = () => {
+
 }
 
 const getUserSelectedModel = () => {
@@ -144,6 +151,7 @@ const removeErrorMessages = () => {
 
 window.addEventListener('load', () => {
     setupAPIKeyInput()
+    setupIntroViewHandlers()
 
     let messages = [
         {

@@ -14,14 +14,30 @@
         <meta name="theme-color" content="hsl(215, 20%, 9%)" media="(prefers-color-scheme: dark)">
     </head>
     <body>
+        <div id="intro-view" class="hidden">
+            <h1>Welcome to Assistant</h1>
+            The power of ChatGPT in a better package:
+            <ul>
+                <li>No logouts, ever.</li>
+                <li><a href="https://openai.com/pricing#language-models" target="_blank">Usage-based pricing</a>. For GPT-3.5, this means about 750 pages of text per dollar.</li>
+                <li>You can install Assistant as a web app on your phone or on your computer.</li>
+            </ul>
+            <div class="start-view">
+                Start by <a href="https://platform.openai.com/account/api-keys" target="_blank">getting an API key</a> from OpenAI.
+                <div class="disclaimer">
+                    OpenAI documentation says "Do not share your API key with others, or expose it in the browser or other client-side code." This means that if you are <strong>building</strong> a web app, you should not leak the service's API key to your users. Assistant stores the API key in your browser's localStorage and only sends it directly to OpenAI's API.
+                </div>
+            </div>
+            OpenAI API key:
+            <input type="text" class="api-key-input" placeholder="sk-xxxx">
+            <br>
+            <br>
+            <button id="intro-continue">Continue</button>
+        </div>
         <div class="container">
             OpenAI API key:
-            <input type="text" id="api-key" placeholder="sk-xxxx">
+            <input type="text" class="api-key-input" placeholder="sk-xxxx">
             <div class="disclaimer">The API key is only sent to Open AI directly. It is saved to your browser's localStorage.</div>
-            <div id="start-view" class="hidden">
-                Start by <a href="https://platform.openai.com/account/api-keys" target="_blank">getting an API key</a> from OpenAI.
-                <div class="disclaimer">OpenAI documentation says "Do not share your API key with others, or expose it in the browser or other client-side code." This means that if you are <strong>building</strong> a web app, you should not leak the service's API key to your users.</div>
-            </div>
             <select id="model-select">
                 <option value="gpt-3.5-turbo">GPT-3.5</option>
                 <option value="gpt-4">GPT-4</option>
