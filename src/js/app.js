@@ -36,38 +36,38 @@ const setupAPIKeyInput = () => {
 }
 
 const updateApiKeyStatus = () => {
-    const statusElement = document.querySelector('#intro-api-key-status')
+    const statusElements = document.querySelectorAll('.api-key-status')
     const continueElement = document.querySelector('#intro-continue')
 
-    statusElement.classList.remove('error')
-    statusElement.classList.remove('success')
+    statusElements.forEach(x => x.classList.remove('error'))
+    statusElements.forEach(x => x.classList.remove('success'))
     continueElement.classList.add('secondary')
 
     const apiKey = localStorage.getItem('api-key')
     if (!apiKey) {
-        statusElement.innerText = ''
+        statusElements.forEach(x => x.innerText = '')
         return
     }
 
-    statusElement.innerText = 'Checking...'
+    statusElements.forEach(x => x.innerText = 'Checking...')
 
     const models = getModels(apiKey)
     models.then(response => {
         if (response.error) {
-            statusElement.classList.add('error')
+            statusElements.forEach(x => x.classList.add('error'))
             if (response.error.code === 'invalid_api_key') {
-                statusElement.innerText = 'This API key doesn’t work.'
+                statusElements.forEach(x => x.innerText = 'This API key doesn’t work.')
             } else {
-                statusElement.innerText = 'There was an error when checking the API key.'
+                statusElements.forEach(x => x.innerText = 'There was an error when checking the API key.')
             }
         } else {
-            statusElement.innerText = 'This API key is working!'
-            statusElement.classList.add('success')
+            statusElements.forEach(x => x.innerText = 'This API key is working!')
+            statusElements.forEach(x => x.classList.add('success'))
             continueElement.classList.remove('secondary')
         }
     }, error => {
-        statusElement.innerText = 'There was an error when checking the API key.'
-        statusElement.classList.add('error')
+        statusElements.forEach(x => x.innerText = 'There was an error when checking the API key.')
+        statusElements.forEach(x => x.classList.add('error'))
     })
 }
 
@@ -76,6 +76,7 @@ const setupSettingsHandlers = () => {
 
     document.querySelector('#settings-button').addEventListener('click', () => {
         settingsView.classList.remove('hidden')
+        updateApiKeyStatus()
     })
 
     document.querySelector('#settings-exit-button').addEventListener('click', () => {
@@ -85,7 +86,6 @@ const setupSettingsHandlers = () => {
     document.querySelector('#settings-show-intro').addEventListener('click', () => {
         settingsView.classList.add('hidden')
         document.querySelector('#intro-view').classList.remove('hidden')
-        updateApiKeyStatus()
     })
 }
 
