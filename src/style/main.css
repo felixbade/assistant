@@ -84,8 +84,8 @@ body {
     box-sizing: border-box;
     min-height: 100vh;
     width: 100%;
-    padding-left: calc(max((100vw - var(--chat-max-width))/2, 1em));
-    padding-right: calc(max((100vw - var(--chat-max-width))/2, 1em));
+    padding-left: calc(max((100vw - var(--chat-max-width))/2, 1em + env(safe-area-inset-left)));
+    padding-right: calc(max((100vw - var(--chat-max-width))/2, 1em + env(safe-area-inset-right)));
     padding-bottom: calc(0.8em + env(safe-area-inset-bottom));
     padding-top: 0.7em;
     z-index: 2;
