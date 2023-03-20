@@ -21,6 +21,7 @@ const setupAPIKeyInput = () => {
             for (const otherApiKeyElement of apiKeyElements) {
                 otherApiKeyElement.value = key
             }
+            updateApiKeyStatus()
         })
     }
 
@@ -34,56 +35,57 @@ const setupAPIKeyInput = () => {
     })
 }
 
-const setupIntroViewHandlers = () => {
+const updateApiKeyStatus = () => {
     const statusElement = document.querySelector('#intro-api-key-status')
-    const apiKeyElement = document.querySelector('#intro-api-key-input')
     const continueElement = document.querySelector('#intro-continue')
 
-    apiKeyElement.addEventListener('input', () => {
-        statusElement.classList.remove('error')
-        statusElement.classList.remove('success')
-        continueElement.classList.add('secondary')
+    statusElement.classList.remove('error')
+    statusElement.classList.remove('success')
+    continueElement.classList.add('secondary')
 
-        const apiKey = apiKeyElement.value
-        if (!apiKey) {
-            statusElement.innerText = ''
-            return
-        }
+    const apiKey = localStorage.getItem('api-key')
+    if (!apiKey) {
+        statusElement.innerText = ''
+        return
+    }
 
-        statusElement.innerText = 'Checking...'
+    statusElement.innerText = 'Checking...'
 
-        const models = getModels(apiKey)
-        models.then(response => {
-            if (response.error) {
-                statusElement.classList.add('error')
-                if (response.error.code === 'invalid_api_key') {
-                    statusElement.innerText = 'This API key doesn’t work.'
-                } else {
-                    statusElement.innerText = 'There was an error when checking the API key.'
-                }
-            } else {
-                statusElement.innerText = 'This API key is working!'
-                statusElement.classList.add('success')
-                continueElement.classList.remove('secondary')
-            }
-        }, error => {
-            statusElement.innerText = 'There was an error when checking the API key.'
+    const models = getModels(apiKey)
+    models.then(response => {
+        if (response.error) {
             statusElement.classList.add('error')
-        })
+            if (response.error.code === 'invalid_api_key') {
+                statusElement.innerText = 'This API key doesn’t work.'
+            } else {
+                statusElement.innerText = 'There was an error when checking the API key.'
+            }
+        } else {
+            statusElement.innerText = 'This API key is working!'
+            statusElement.classList.add('success')
+            continueElement.classList.remove('secondary')
+        }
+    }, error => {
+        statusElement.innerText = 'There was an error when checking the API key.'
+        statusElement.classList.add('error')
     })
 }
 
 const setupSettingsHandlers = () => {
     const settingsView = document.querySelector('#settings-view')
-    const settingsButton = document.querySelector('#settings-button')
-    const settingsExitButton = document.querySelector('#settings-exit-button')
 
-    settingsButton.addEventListener('click', () => {
+    document.querySelector('#settings-button').addEventListener('click', () => {
         settingsView.classList.remove('hidden')
     })
 
-    settingsExitButton.addEventListener('click', () => {
+    document.querySelector('#settings-exit-button').addEventListener('click', () => {
         settingsView.classList.add('hidden')
+    })
+
+    document.querySelector('#settings-show-intro').addEventListener('click', () => {
+        settingsView.classList.add('hidden')
+        document.querySelector('#intro-view').classList.remove('hidden')
+        updateApiKeyStatus()
     })
 }
 
@@ -201,7 +203,6 @@ const removeErrorMessages = () => {
 
 window.addEventListener('load', () => {
     setupAPIKeyInput()
-    setupIntroViewHandlers()
     setupSettingsHandlers()
 
     let messages = [

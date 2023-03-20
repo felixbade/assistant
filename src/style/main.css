@@ -94,6 +94,10 @@ body {
     -webkit-backdrop-filter: blur(8px); /* Needed for Safari in 2023 */
 }
 
+#settings-view h1 {
+    margin-top: 0.3em;
+}
+
 .assistant-icon-container {
     text-align: center;
     margin-top: 2em;
