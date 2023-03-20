@@ -32,6 +32,7 @@ const setupAPIKeyInput = () => {
 
     document.querySelector('#intro-continue').addEventListener('click', () => {
         introView.classList.add('hidden')
+        document.querySelector('#prompt').focus()
     })
 }
 
@@ -86,6 +87,7 @@ const setupSettingsHandlers = () => {
 
     document.querySelector('#settings-exit-button').addEventListener('click', () => {
         settingsView.classList.add('hidden')
+        document.querySelector('#prompt').focus()
     })
 
     document.querySelector('#settings-show-intro').addEventListener('click', () => {
