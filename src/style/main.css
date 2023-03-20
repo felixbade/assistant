@@ -46,6 +46,7 @@ body {
 #settings-button, #settings-exit-button {
     float: right;
     margin-right: -0.1em;
+    height: 25px;
 }
 
 #settings-button:hover, #settings-exit-button:hover {
