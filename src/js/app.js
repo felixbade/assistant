@@ -35,17 +35,22 @@ const setupAPIKeyInput = () => {
     })
 }
 
+const clearApiKeyStatus = () => {
+    const statusElements = document.querySelectorAll('.api-key-status')
+    statusElements.forEach(x => x.classList.remove('error'))
+    statusElements.forEach(x => x.classList.remove('success'))
+    statusElements.forEach(x => x.innerText = '')
+}
+
 const updateApiKeyStatus = () => {
     const statusElements = document.querySelectorAll('.api-key-status')
     const continueElement = document.querySelector('#intro-continue')
 
-    statusElements.forEach(x => x.classList.remove('error'))
-    statusElements.forEach(x => x.classList.remove('success'))
+    clearApiKeyStatus()
     continueElement.classList.add('secondary')
 
     const apiKey = localStorage.getItem('api-key')
     if (!apiKey) {
-        statusElements.forEach(x => x.innerText = '')
         return
     }
 
@@ -76,7 +81,7 @@ const setupSettingsHandlers = () => {
 
     document.querySelector('#settings-button').addEventListener('click', () => {
         settingsView.classList.remove('hidden')
-        updateApiKeyStatus()
+        clearApiKeyStatus()
     })
 
     document.querySelector('#settings-exit-button').addEventListener('click', () => {
@@ -86,6 +91,7 @@ const setupSettingsHandlers = () => {
     document.querySelector('#settings-show-intro').addEventListener('click', () => {
         settingsView.classList.add('hidden')
         document.querySelector('#intro-view').classList.remove('hidden')
+        updateApiKeyStatus()
     })
 }
 
