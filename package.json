@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "dompurify": "^3.0.1",
+    "html2canvas": "^1.4.1",
     "marked": "^4.2.12",
     "workbox-webpack-plugin": "^6.5.4"
   }

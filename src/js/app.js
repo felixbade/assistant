@@ -5,6 +5,7 @@ import {
     updateTextareaSize
 } from './utils'
 import { markdownToDocumentFragment } from './markdown'
+import html2canvas from 'html2canvas'
 
 const setupAPIKeyInput = () => {
     const apiKeyElements = document.querySelectorAll('.api-key-input')
@@ -87,7 +88,7 @@ const setupSettingsHandlers = () => {
 
     document.querySelector('#settings-exit-button').addEventListener('click', () => {
         settingsView.classList.add('hidden')
-        document.querySelector('#prompt').focus()
+        // document.querySelector('#prompt').focus() // annoying on mobile
     })
 
     document.querySelector('#settings-show-intro').addEventListener('click', () => {
@@ -101,6 +102,29 @@ const setupSettingsHandlers = () => {
 const getUserSelectedModel = () => {
     const modelSelect = document.querySelector('#model-select')
     return modelSelect.options[modelSelect.selectedIndex].value
+}
+
+
+const saveScreenshot = () => {
+
+    // Get a reference to the element you want to save
+    const elementToSave = document.querySelector('#output');
+
+    // Use html2canvas to render the element as a canvas
+    html2canvas(elementToSave).then(canvas => {
+        // Convert the canvas to a downloadable data URL (image/png format)
+        const dataURL = canvas.toDataURL('image/png')
+
+        // Create a temporary anchor to download the image
+        const tempAnchor = document.createElement('a')
+        tempAnchor.href = dataURL
+        tempAnchor.download = 'screenshot.png'
+
+        // Append the anchor to the document, simulate a click and remove the anchor
+        document.body.appendChild(tempAnchor)
+        tempAnchor.click()
+        document.body.removeChild(tempAnchor)
+    })
 }
 
 
@@ -212,6 +236,10 @@ const removeErrorMessages = () => {
 window.addEventListener('load', () => {
     setupAPIKeyInput()
     setupSettingsHandlers()
+
+    document.querySelector('#screenshot-button').addEventListener('click', () => {
+        saveScreenshot()
+    })
 
     let messages = [
         {
