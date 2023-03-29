@@ -118,13 +118,44 @@ const saveScreenshot = () => {
         // Create a temporary anchor to download the image
         const tempAnchor = document.createElement('a')
         tempAnchor.href = dataURL
-        tempAnchor.download = 'screenshot.png'
+        tempAnchor.download = 'assistant.png'
 
         // Append the anchor to the document, simulate a click and remove the anchor
         document.body.appendChild(tempAnchor)
         tempAnchor.click()
         document.body.removeChild(tempAnchor)
     })
+}
+
+
+const saveMarkdown = (messages) => {
+    // Convert messages array to markdown string
+    const markdownContent = messages.map((message) => {
+        let prefix = ''
+        if (message.role === 'system') {
+            prefix = '> '
+        }
+        if (message.role === 'assistant') {
+            prefix = '## Assistant\n'
+        }
+        if (message.role === 'user') {
+            prefix = '## User\n'
+        }
+        return `${prefix}${message.content}`
+    }).join('\n\n')
+
+    // Create a downloadable data URL (text/markdown format)
+    const dataURL = 'data:text/markdown;charset=utf-8,' + encodeURIComponent(markdownContent)
+
+    // Create a temporary anchor to download the markdown file
+    const tempAnchor = document.createElement('a')
+    tempAnchor.href = dataURL
+    tempAnchor.download = 'assistant.md'
+
+    // Append the anchor to the document, simulate a click and remove the anchor
+    document.body.appendChild(tempAnchor)
+    tempAnchor.click()
+    document.body.removeChild(tempAnchor)
 }
 
 
@@ -237,16 +268,20 @@ window.addEventListener('load', () => {
     setupAPIKeyInput()
     setupSettingsHandlers()
 
-    document.querySelector('#screenshot-button').addEventListener('click', () => {
-        saveScreenshot()
-    })
-
     let messages = [
         {
             'role': 'system',
             'content': 'Response format is ALWAYS markdown, especially for code.'
         }
     ]
+
+    document.querySelector('#screenshot-button').addEventListener('click', () => {
+        saveScreenshot()
+    })
+
+    document.querySelector('#save-md-button').addEventListener('click', () => {
+        saveMarkdown(messages)
+    })
 
     const sendMessage = (message) => {
         removeErrorMessages()
