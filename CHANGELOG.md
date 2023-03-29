@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.1] – 2023-03-29
+
+### Added
+
+- Save conversation as markdown ([#78](https://github.com/felixbade/chatgpt-web-ui/issues/78)).
+
 ## [1.4.0] – 2023-03-20
 
 ### Added
