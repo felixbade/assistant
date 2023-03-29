@@ -292,8 +292,14 @@ window.addEventListener('load', () => {
         let newMessage = {}
         let newMessageBubble = null
 
+        // +1 because always include the new message
+        const maxMessages = parseInt(localStorage.getItem('maximum-messages')) + 1
+        const systemMessage = messages[0]
+        // .slice(1) so the systemMessage doesn't appear twice
+        const truncatedMessages = [systemMessage, ...messages.slice(1).slice(-maxMessages)]
+
         chatCompletionStream(apiKey, {
-            messages,
+            messages: truncatedMessages,
             model
         },
         (response) => {
