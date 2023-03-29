@@ -131,17 +131,8 @@ const saveScreenshot = () => {
 const saveMarkdown = (messages) => {
     // Convert messages array to markdown string
     const markdownContent = messages.map((message) => {
-        let prefix = ''
-        if (message.role === 'system') {
-            prefix = '> '
-        }
-        if (message.role === 'assistant') {
-            prefix = '## Assistant\n'
-        }
-        if (message.role === 'user') {
-            prefix = '## User\n'
-        }
-        return `${prefix}${message.content}`
+        const capitalized = text => text[0].toUpperCase() + text.slice(1)
+        return `## ${capitalized(message.role)}\n${message.content}`
     }).join('\n\n')
 
     // Create a downloadable data URL (text/markdown format)
