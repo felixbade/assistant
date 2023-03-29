@@ -7,10 +7,11 @@ if [[ -n $DESCRIBE ]]; then
     RESULT=$(echo $DESCRIBE | sed 's/^v\([0-9]\)/\1/')
 else
     RESULT=$GIT_HASH
-    # Add a * to the hash if there are uncommitted changes
-    if [[ -n $(git status -s) ]]; then
-        RESULT+="*"
-    fi
+fi
+
+# Add a * to the hash if there are uncommitted changes
+if [[ -n $(git status -s) ]]; then
+    RESULT+="*"
 fi
 
 echo $RESULT
