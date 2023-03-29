@@ -2,22 +2,23 @@
 
 https://assistant.bloat.app
 
-Ask questions from Open AI’s ChatGPT `gpt-3.5-turbo` engine.
+Ask questions from Open AI’s ChatGPT `gpt-3.5-turbo` and `gpt-4` engines (GPT-4 requires early access).
 
 See [`CHANGELOG.md`](CHANGELOG.md) for what’s new.
 
 ## 🤔 Why?
 
 ### Compared to chat.openai.com
-- Token-based cost, instead of flat 20$/mo
+- GPT-3.5: Cheap token-based cost, instead of flat 20$/mo
+- GPT-4: Unlimited messages
 - No more logouts - OpenAI API key is stored in `localStorage`
 - Can be added to the phone’s home screen or installed on your computer as a Chrome app
 - OpenAI’s API policy says your prompts won’t be used for developing, unlike in the playground
 
 ### Compared to many other ChatGPT wrappers
-- Requests go directly from the browser to OpenAI – no backend server
+- No backend server – requests go directly from the browser to OpenAI
+- [Very polished UI](https://github.com/felixbade/chatgpt-web-ui/issues?q=label%3AUI+is%3Aclosed), especially for mobile.
 - PWA support
-- Different UI design
 
 ## 🚚 In the future
 - Customize the assistant’s behind-the-scenes brief
