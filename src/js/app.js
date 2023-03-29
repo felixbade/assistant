@@ -106,12 +106,11 @@ const getUserSelectedModel = () => {
 
 
 const saveScreenshot = () => {
-
-    // Get a reference to the element you want to save
-    const elementToSave = document.querySelector('#output');
+    const elementToSave = document.querySelector('#output')
+    const backgroundColor = getComputedStyle(document.body).backgroundColor
 
     // Use html2canvas to render the element as a canvas
-    html2canvas(elementToSave).then(canvas => {
+    html2canvas(elementToSave, { backgroundColor }).then(canvas => {
         // Convert the canvas to a downloadable data URL (image/png format)
         const dataURL = canvas.toDataURL('image/png')
 
