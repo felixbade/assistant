@@ -48,7 +48,7 @@
                 </div>
             </div>
             OpenAI API key:
-            <input type="text" class="api-key-input" id="intro-api-key-input" placeholder="sk-xxxx">
+            <input type="text" class="api-key-input" id="intro-api-key-input" data-persistent-name="api-key" placeholder="sk-xxxx">
             <br>
             <div id="intro-api-key-status" class="api-key-status"></div>
             <br>
@@ -69,8 +69,13 @@
             <br>
             <br>
 
+            Maximum number of last messages sent as context for ChatGPT:
+            <input type="number" data-persistent-name="maximum-messages">
+            <br>
+            <br>
+
             OpenAI API key:
-            <input type="text" class="api-key-input" placeholder="sk-xxxx">
+            <input type="text" class="api-key-input" data-persistent-name="api-key" placeholder="sk-xxxx">
             <br>
             <div class="api-key-status"></div>
             <br>

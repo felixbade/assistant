@@ -25,3 +25,34 @@ export const updateTextareaSize = (element) => {
 
     element.style.height = `${height}px`
 }
+
+export const setupPersistentInputs = () => {
+    const persistentInputs = document.querySelectorAll('input[data-persistent-name]')
+
+    const getName = element => element.getAttribute('data-persistent-name')
+
+    for (const persistentInput of persistentInputs) {
+        const name = getName(persistentInput)
+        const savedValue = localStorage.getItem(name) || ''
+        persistentInput.value = savedValue
+
+        persistentInput.addEventListener('input', () => {
+            const value = persistentInput.value
+            localStorage.setItem(name, value)
+            console.log('saving:', name, value)
+
+            for (const otherInput of persistentInputs) {
+                if (getName(otherInput) === name) {
+                    otherInput.value = value
+                }
+            }
+        })
+
+        // from other tabs
+        window.addEventListener('storage', event => {
+            if (event.key === name) {
+                persistentInput.value = event.newValue
+            }
+        })
+    }
+}

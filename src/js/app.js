@@ -2,30 +2,28 @@ import { chatCompletionStream, getModels } from './api'
 import {
     parseHashParams,
     isScrolledToBottom,
-    updateTextareaSize
+    updateTextareaSize,
+    setupPersistentInputs
 } from './utils'
 import { markdownToDocumentFragment } from './markdown'
 import html2canvas from 'html2canvas'
 
 const setupAPIKeyInput = () => {
+    window.addEventListener('storage', event => {
+        if (event.key === 'api-key') {
+            updateApiKeyStatus()
+        }
+    })
+
+    // storage event is fired only when other tabs change the storage
     const apiKeyElements = document.querySelectorAll('.api-key-input')
-    const savedAPIKey = localStorage.getItem('api-key') || ''
-    console.log('savedapikey:', savedAPIKey)
-
     for (const apiKeyElement of apiKeyElements) {
-        apiKeyElement.value = savedAPIKey
-
         apiKeyElement.addEventListener('input', () => {
-            const key = apiKeyElement.value
-            console.log('saving:', key)
-            localStorage.setItem('api-key', key)
-            for (const otherApiKeyElement of apiKeyElements) {
-                otherApiKeyElement.value = key
-            }
             updateApiKeyStatus()
         })
     }
 
+    const savedAPIKey = localStorage.getItem('api-key')
     const introView = document.querySelector('#intro-view')
     if (!savedAPIKey) {
         introView.classList.remove('hidden')
@@ -255,6 +253,7 @@ const removeErrorMessages = () => {
 }
 
 window.addEventListener('load', () => {
+    setupPersistentInputs()
     setupAPIKeyInput()
     setupSettingsHandlers()
 
