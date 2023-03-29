@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.2] – 2023-03-29
+
+### Fixed
+
+- Screenshot function background in dark mode ([#77](https://github.com/felixbade/chatgpt-web-ui/issues/77)).
+
 ## [1.4.1] – 2023-03-29
 
 ### Added
