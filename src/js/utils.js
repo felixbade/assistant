@@ -28,13 +28,21 @@ export const updateTextareaSize = (element) => {
 
 export const setupPersistentInputs = () => {
     const persistentInputs = document.querySelectorAll('input[data-persistent-name]')
-
     const getName = element => element.getAttribute('data-persistent-name')
 
+    // Load default values from HTML if no saved data
     for (const persistentInput of persistentInputs) {
         const name = getName(persistentInput)
-        const savedValue = localStorage.getItem(name) || ''
-        persistentInput.value = savedValue
+        const savedValue = localStorage.getItem(name)
+        if (!savedValue) {
+            localStorage.setItem(name, persistentInput.value)
+        }
+    }
+
+    // Update fields with saved data
+    for (const persistentInput of persistentInputs) {
+        const name = getName(persistentInput)
+        persistentInput.value = localStorage.getItem(name)
 
         persistentInput.addEventListener('input', () => {
             const value = persistentInput.value
