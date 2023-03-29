@@ -358,7 +358,7 @@ button {
     color: var(--my-message-fg);
     border: none;
     padding: 0.4em 0.8em;
-    border-radius: 19px;
+    border-radius: 1em;
     font-size: 1em;
     margin: 0.2em 0px;
     font-weight: 500;
