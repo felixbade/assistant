@@ -152,6 +152,10 @@ body {
     max-height: 70vh;
 }
 
+#submit {
+    margin: 0;
+}
+
 #prompt-container {
     flex: 1;
     margin-right: 0.5em;
