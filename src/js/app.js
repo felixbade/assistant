@@ -82,6 +82,13 @@ const setupSettingsHandlers = () => {
     document.querySelector('#settings-button').addEventListener('click', () => {
         settingsView.classList.remove('hidden')
         clearApiKeyStatus()
+
+        // textarea height is incorrectly calculated when it's hidden from the viewport
+        // calculate it again
+        // this logic should be generalized but works for now like this
+        for (const textarea of document.querySelectorAll('textarea')) {
+            updateTextareaSize(textarea)
+        }
     })
 
     document.querySelector('#settings-exit-button').addEventListener('click', () => {
@@ -260,7 +267,7 @@ window.addEventListener('load', () => {
     let messages = [
         {
             'role': 'system',
-            'content': 'Response format is ALWAYS markdown, especially for code.'
+            'content': localStorage.getItem('initial-system-message')
         }
     ]
 
@@ -365,11 +372,12 @@ window.addEventListener('load', () => {
         submitMessageForm()
     })
 
-    textbox.addEventListener('input', () => {
-        updateTextareaSize(textbox)
-    })
-    updateTextareaSize(textbox)
-
+    for (const textarea of document.querySelectorAll('textarea')) {
+        textarea.addEventListener('input', () => {
+            updateTextareaSize(textarea)
+        })
+        updateTextareaSize(textarea)
+    }
 
     document.addEventListener('keydown', event => {
         if (event.ctrlKey && event.key.toLowerCase() === 'm') {

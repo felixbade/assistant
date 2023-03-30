@@ -27,7 +27,7 @@ export const updateTextareaSize = (element) => {
 }
 
 export const setupPersistentInputs = () => {
-    const persistentInputs = document.querySelectorAll('input[data-persistent-name]')
+    const persistentInputs = document.querySelectorAll('[data-persistent-name]')
     const getName = element => element.getAttribute('data-persistent-name')
 
     // Load default values from HTML if no saved data
