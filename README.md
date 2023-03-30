@@ -1,4 +1,4 @@
-# Web UI for ChatGPT
+# Assistant – Web UI for ChatGPT
 
 https://assistant.bloat.app
 
