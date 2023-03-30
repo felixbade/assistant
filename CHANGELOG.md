@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.0] – 2023-03-30
+
+### Added
+
+- Support for unlimited length conversations. Settings for number of last messages sent ([#70](https://github.com/felixbade/chatgpt-web-ui/issues/70)).
+- Settings for initial system message ([#5](https://github.com/felixbade/chatgpt-web-ui/issues/5)).
+
+### Fixed
+
+- Style for &lt;hr&gt; element (markdown: `---`) ([#76](https://github.com/felixbade/chatgpt-web-ui/issues/76)).
+
 ## [1.4.2] – 2023-03-29
 
 ### Fixed
