@@ -2,6 +2,10 @@
 
 You found this page. Maybe you will also find bugs or missing features. You can tell me about them in the GitHub [issues](https://github.com/felixbade/assistant/issues).
 
+- 🙌 Feature requests 🔥
+- 🤩 Bug reports 🫶
+- 🤨 Pull requests 👀
+
 ## Philosophy
 - OpenAI has made the best chat AI API. This tools shall be the best human-interface for that.
 - ”Getting started” UX is extremely important. It is the main filter for user base growth after marketing.
@@ -19,6 +23,7 @@ See [existing feature requests](https://github.com/felixbade/assistant/issues?q=
 ## Bug reports
 I want to make this tool rock solid and ergonomic, but I can’t test all scenarios. The first step of fixing bugs is finding them, and the second is describing what the bug is about. You can do these without touching the code. The better your report, the more likely it is that I fix it quickly.
 
+- Please explain how to reproduce the bug. I can’t fix it if I can’t observe it.
 - Please explain how it behaves, and how you would expect it to behave. Again, it might be obvious to you, but...
 - Some bugs are debatable, but in general, if it's a ”feature” that distracts you, it’s a bug.
 
@@ -28,3 +33,7 @@ If you are not sure whether your issue is a bug report or a feature request, don
 
 ## Pull requests
 In general, I’m more interested in feature requests and bug reports than pull requests. My goal is not to add all possible features – rather, to curate a minimal, yet powerful feature set.
+
+This might change later if I no longer have time to actuvely develop this project.
+
+Feel free to make your own fork though!
