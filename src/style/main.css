@@ -99,6 +99,12 @@ body {
     margin-top: 0.3em;
 }
 
+#settings-view h2 {
+    font-weight: 400;
+    font-size: 1.3em;
+    margin: 1em 0 0.6em 0;
+}
+
 #system-message {
     max-height: 20vh;
 }
@@ -221,6 +227,13 @@ input {
     font-size: 0.8em;
 }
 
+hr {
+    border: none;
+    border-top: 1px solid var(--input-border);
+    background: none;
+    margin: 1.4em 0;
+}
+
 p {
     margin: 0.5em 0;
 }
@@ -317,7 +330,7 @@ a:hover {
 }
 
 .disclaimer {
-    font-size: 0.7em;
+    font-size: 0.75em;
     line-height: 130%;
     margin: 0.35em 0;
 }

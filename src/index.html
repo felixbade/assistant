@@ -62,31 +62,42 @@
                 </svg>
             </button>
             <h1>Settings</h1>
+            All settings are saved and synced across tabs.
 
+            <hr>
+
+            <h2>Save conversation</h2>
             <button id="save-md-button" class="secondary">Save as markdown</button>
             <br>
             <button id="screenshot-button" class="secondary">Save as PNG</button>
             <br>
+
+            <hr>
+
+            <h2>Maximum number of previous messages sent to the API</h2>
+            <div class="disclaimer">ChatGPT has no memory, so the conversation history needs to be sent during each new message. Sending all messages can get expensive, and will eventually reach the maximum number of tokens allowed per request. You can adjust this parameter during the conversation if you feel the AI should have more context, or if you want to save tokens. Zero means only the last user’s message and the initial system message will be sent.</div>
+            <input type="number" inputmode="numeric" pattern="[0-9]*" min="0" data-persistent-name="maximum-messages" value="5">
             <br>
 
-            Maximum number of last messages sent as context for ChatGPT:
-            <input type="number" inputmode="numeric" pattern="[0-9]*" data-persistent-name="maximum-messages" value="5">
-            <br>
-            <br>
-
-            Initial system message:
-            <br>
+            <h2>Initial system message</h2>
+            <div class="disclaimer">You can write here any instructions for the AI that you don't want to manually repeat in each conversation. This is sent to the API even if early messages are truncated.</div>
             <div class="textarea-border-radius">
                 <textarea data-persistent-name="initial-system-message" id="system-message">User prefers markdown</textarea>
             </div>
-            <br>
 
-            OpenAI API key:
+            <hr>
+
+            <h2>OpenAI API key</h2>
+            <div class="disclaimer">You can find your API keys from the <a href="https://platform.openai.com/account/api-keys">OpenAI’s API key page</a>.</div>
             <input type="text" class="api-key-input" data-persistent-name="api-key" placeholder="sk-xxxx">
             <br>
             <div class="api-key-status"></div>
-            <br>
+
+            <hr>
+
             <button id="settings-show-intro" class="secondary">Show intro</button>
+
+            <br>
 
             <footer>
                 <a href="https://platform.openai.com/account/usage" target="_blank">Your usage</a>
