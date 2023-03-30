@@ -34,6 +34,6 @@ If you are not sure whether your issue is a bug report or a feature request, don
 ## Pull requests
 In general, I’m more interested in feature requests and bug reports than pull requests. My goal is not to add all possible features – rather, to curate a minimal, yet powerful feature set.
 
-This might change later if I no longer have time to actuvely develop this project.
+This might change later if I no longer have time to actively develop this project.
 
 Feel free to make your own fork though!
