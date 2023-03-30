@@ -91,8 +91,8 @@ body {
     padding-top: 0.7em;
     z-index: 2;
     background-color: var(--compose-box-bg);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px); /* Needed for Safari in 2023 */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px); /* Needed for Safari in 2023 */
 }
 
 #settings-view h1 {
