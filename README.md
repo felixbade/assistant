@@ -1,8 +1,8 @@
-# Assistant – Web UI for ChatGPT
+# Assistant – Web UI for ChatGPT API
 
 https://assistant.bloat.app
 
-Use OpenAI’s chat API as a human.
+A mobile-friendly human interface for ChatGPT API. There is no back-end server, so you can easily host your own instance (see details below).
 
 See [`CHANGELOG.md`](CHANGELOG.md) for what’s new.
 
@@ -37,6 +37,11 @@ See [`CHANGELOG.md`](CHANGELOG.md) for what’s new.
 ## 🚚 In the future
 - Search old chats with GPT embeddings (meaning your search words don’t need to be an exact match)
 - Speak your messages using the Whisper API
+
+## 🔧 Hosting your own version
+- `npm install`
+- `npm run build:prod`
+- The bundle will go under `dist/`. Copy those files somewhere so they show up as a web page (for example GitHub Pages or Nginx).
 
 ## 💙 Contributing
 The best way to contribute is by adding feature requests and bug reports to the GitHub [issues](https://github.com/felixbade/chatgpt-web-ui/issues) – you don’t need to be a programmer for that. See [`CONTRIBUTING.md`](CONTRIBUTING.md) for details.
