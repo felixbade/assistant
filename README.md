@@ -7,10 +7,10 @@ A mobile-friendly human interface for ChatGPT API. There is no back-end server, 
 See [`CHANGELOG.md`](CHANGELOG.md) for what’s new.
 
 ## 🤔 Why API instead of ChatGPT Plus?
-- `gpt-3.5-turbo`: Cheap token-based cost, instead of flat 20$/mo
-- `gpt-4`: Unlimited requests (requires early access)
-- No logouts – if OpenAI started revoking API keys weekly, a lot of big SaaS products would get very angry
-- OpenAI’s API policy says your prompts won’t be used for developing, unlike in the playground
+- `gpt-3.5-turbo`: **Cheap** token-based cost, instead of flat 20$/mo
+- `gpt-4`: **Unlimited** requests (requires early access)
+- **No logouts** – if OpenAI started revoking API keys weekly, a lot of big SaaS products would get very angry
+- **Private** – OpenAI’s API policy says your prompts won’t be used for developing, unlike in the playground.
 
 ## 🔩 Features
 - Very polished, mobile-friendly UI
