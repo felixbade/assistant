@@ -13,7 +13,8 @@ export const markdownToDocumentFragment = md => {
 
     // markdown -> sanitized html -> element
     const html = sanitize(parse(md, {
-        gfm: true
+        gfm: true,
+        breaks: true,
     }))
     const documentFragment = htmlToDocumentFragment(html)
 

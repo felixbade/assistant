@@ -28,7 +28,7 @@ html {
 body {
     margin: 0;
     font-family: sans-serif;
-    line-height: 135%;
+    line-height: 140%;
     background-color: var(--bg);
     color: var(--fg);
     display: flex;
@@ -242,6 +242,10 @@ p {
     margin: 0.5em 0;
 }
 
+br {
+    line-height: inherit;
+}
+
 code {
     white-space: pre-wrap;
     border: 1px solid var(--code-border);
@@ -318,10 +322,6 @@ tr:last-child td:last-child { border-bottom-right-radius: var(--block-border-rad
 
 .message-bubble img {
     width: 100%;
-}
-
-br {
-    line-height: 200%;
 }
 
 a, a:visited {
