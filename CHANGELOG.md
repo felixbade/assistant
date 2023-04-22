@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.2] – 2023-04-22
+
+### Fixed
+- Long words no longer make the messages view wider than the window ([#81](https://github.com/felixbade/assistant/issues/81)).
+
 ## [1.5.1] – 2023-04-22
 
 ### Fixed
