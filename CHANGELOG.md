@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.1] – 2023-04-22
+
+### Fixed
+- Single linebreaks in user’s message are now rendered in message bubble like in compose box ([#92](https://github.com/felixbade/assistant/issues/92)).
+
 ## [1.5.0] – 2023-03-30
 
 ### Added
