@@ -4,7 +4,7 @@ https://assistant.bloat.app
 
 A mobile-friendly human interface for ChatGPT API. There is no back-end server, so you can easily host your own instance (see details below).
 
-See [`CHANGELOG.md`](CHANGELOG.md) for what’s new.
+See [`CHANGELOG.md`](CHANGELOG.md) for what’s new..
 
 ## 🤔 Why API instead of ChatGPT Plus?
 - `gpt-3.5-turbo`: **Cheap** token-based cost, instead of flat 20$/mo
