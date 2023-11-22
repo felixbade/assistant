@@ -395,4 +395,24 @@ window.addEventListener('load', () => {
         }
     }
 
+    // Check if there is a "last-selected-model" key in localStorage
+    // If there is, select that model
+    const modelSelect = document.querySelector('#model-select')
+    const lastSelectedModel = localStorage.getItem('last-selected-model')
+    if (lastSelectedModel) {
+        for (const option of modelSelect.options) {
+            if (option.value === lastSelectedModel) {
+                option.selected = true
+                break
+            }
+        }
+    }
+
+    // Listen to changes in the model select
+    // When the model is changed, save the new model in localStorage
+    modelSelect.addEventListener('change', () => {
+        const selectedModel = getUserSelectedModel()
+        localStorage.setItem('last-selected-model', selectedModel)
+    })
+
 })
