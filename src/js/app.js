@@ -393,6 +393,10 @@ window.addEventListener('load', () => {
         } else {
             select.selectedIndex = 0
         }
+
+        // Dispatch a synthetic change event
+        const event = new Event('change', { bubbles: true })
+        select.dispatchEvent(event)
     }
 
     // Check if there is a "last-selected-model" key in localStorage
