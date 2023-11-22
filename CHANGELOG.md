@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.7.0] – 2023-11-22
+- Last selected model is now remembered ([#103](https://github.com/felixbade/assistant/issues/103)).
+
 ## [1.6.0] – 2023-11-07
 
 - Added GPT-4 Turbo support.
