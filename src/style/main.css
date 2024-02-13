@@ -384,7 +384,28 @@ textarea {
     font-size: 1em;
 }
 
+button#clipboard {
+    border: 1px solid #2D323A;
+    color: #90969F;
+    background: none;
+}
+
+button#clipboard:hover {
+    border: 1px solid #5C6470;
+    color: #C8CED7;
+    background: none;
+}
+
+button#clipboard:active {
+    border: 1px solid #bbc6d7;
+    color: #e2e9f3;
+    background: none;
+}
+
+
+
 button {
+    transition: background-color 0.1s, color 0.1s;
     background-color: var(--my-message-bg);
     color: var(--my-message-fg);
     border: none;
@@ -394,6 +415,17 @@ button {
     margin: 0.2em 0;
     font-weight: 500;
 }
+
+button:hover {
+    background-color: var(--my-message-fg);
+    color: var(--my-message-bg);
+}
+
+button:active {
+    background-color: var(--my-message-bg);
+    color: var(--my-message-fg);
+}
+
 
 button.secondary {
     background-color: var(--response-bg);
