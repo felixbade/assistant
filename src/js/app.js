@@ -237,7 +237,27 @@ const addSentMessage = message => {
 }
 
 const addReceivedMessage = message => {
-    return addMessage(message, 'response')
+    
+    const messageContainer = addMessage(message, 'response')
+
+    const copyButton = document.createElement('button')
+    copyButton.type = 'button'
+    copyButton.id = 'clipboard'
+    copyButton.innerText = 'Copy to Clipboard'
+    copyButton.addEventListener('click', () => {
+        // Exclude "Copy to Clipboard" text from the content to be copied
+        const textContent = messageContainer.textContent.replace('Copy to Clipboard', '').trim();
+        const markdownContent = `${textContent}`; 
+        navigator.clipboard.writeText(markdownContent)
+        .then(() => {
+            showNotification('Copied!')
+        })
+        .catch((error) => {
+            showNotification('Error copying text to clipboard:', error)
+        })
+    })    
+    messageContainer.parentElement.insertBefore(copyButton, messageContainer);
+    return messageContainer
 }
 
 const addErrorMessage = (message, type) => {
