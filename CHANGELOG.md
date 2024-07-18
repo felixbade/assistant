@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.9.0] – 2024-07-18
+- Added GPT-4o mini support.
+
 ## [1.8.0] – 2024-05-14
 - Added GPT-4o support.
 - Changed GPT-4 Turbo from `gpt-4-1106-preview` to `gpt-4-turbo`.
