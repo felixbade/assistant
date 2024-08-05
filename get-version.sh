@@ -1,3 +1,11 @@
+#!/bin/bash
+
+if ! git status > /dev/null 2>&1; then
+  # not in a git directory
+  echo 'unknown'
+  exit 0
+fi
+
 # Return the current git tag (if present) or the first characters of the commit hash
 GIT_HASH=$(git log -n1 --pretty='%h')
 DESCRIBE=$(git describe --exact-match --tags $GIT_HASH 2> /dev/null)
