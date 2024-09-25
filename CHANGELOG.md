@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ## [1.10.0] – 2024-09-25
-- Added o1-preview and o1-mini support.
+- Added o1-preview and o1-mini support. ([API limitations](https://platform.openai.com/docs/guides/reasoning/beta-limitations))
 - Updated dependencies and `get-version.sh`
 
 ## [1.9.0] – 2024-07-18
