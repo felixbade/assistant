@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.11.0] – 2025-08-08
+- Added models:
+    - GPT-5 (`gpt-5`)
+    - GPT-5 mini (`gpt-5-mini`)
+    - GPT-5 nano (`gpt-5-nano`)
+- Removed deprecated models:
+    - o1-preview
+    - o1-mini
+
 ## [1.10.0] – 2024-09-25
 - Added o1-preview and o1-mini support. ([API limitations](https://platform.openai.com/docs/guides/reasoning/beta-limitations))
 - Updated dependencies and `get-version.sh`
