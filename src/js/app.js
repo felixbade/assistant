@@ -3,10 +3,121 @@ import {
     parseHashParams,
     isScrolledToBottom,
     updateTextareaSize,
-    setupPersistentInputs
+    setupPersistentInputs,
+    filterAndSortModels
 } from './utils'
 import { markdownToDocumentFragment } from './markdown'
 import html2canvas from 'html2canvas'
+
+const showModelPlaceholder = (text) => {
+    const modelSelect = document.querySelector('#model-select')
+    if (!modelSelect) return
+
+    modelSelect.innerHTML = ''
+    const option = document.createElement('option')
+    option.value = ''
+    option.disabled = true
+    option.selected = true
+    option.innerText = text
+    modelSelect.appendChild(option)
+}
+
+const renderModelOptions = (models) => {
+    if (!models || models.length === 0) {
+        showModelPlaceholder('No models available')
+        return
+    }
+
+    const modelSelect = document.querySelector('#model-select')
+    if (!modelSelect) return
+
+    const currentOptions = Array.from(modelSelect.options).map(o => o.value)
+    const isSame = currentOptions.length === models.length && currentOptions.every((v, i) => v === models[i])
+
+    const savedSelected = localStorage.getItem('last-selected-model')
+    const preferredSelected = modelSelect.value || savedSelected
+
+    if (!isSame) {
+        modelSelect.innerHTML = ''
+        for (const model of models) {
+            const option = document.createElement('option')
+            option.value = model
+            option.innerText = model
+            modelSelect.appendChild(option)
+        }
+    }
+
+    if (preferredSelected && models.includes(preferredSelected)) {
+        modelSelect.value = preferredSelected
+    } else {
+        modelSelect.value = models[0]
+    }
+
+    localStorage.setItem('last-selected-model', modelSelect.value)
+}
+
+const loadCachedModels = () => {
+    try {
+        const cached = localStorage.getItem('cached-models')
+        if (cached) {
+            const models = JSON.parse(cached)
+            if (Array.isArray(models) && models.length > 0) {
+                renderModelOptions(models)
+                return
+            }
+        }
+
+        // For existing users who don't have cached-models yet:
+        const lastModel = localStorage.getItem('last-selected-model')
+        if (lastModel) {
+            renderModelOptions([lastModel])
+            return
+        }
+    } catch (e) {
+        console.error('Error loading cached models:', e)
+    }
+
+    renderModelOptions([])
+}
+
+const updateModelsFromData = (data) => {
+    const models = filterAndSortModels(data)
+    if (models.length > 0) {
+        localStorage.setItem('cached-models', JSON.stringify(models))
+        renderModelOptions(models)
+    }
+    return models
+}
+
+const hasModelOptions = () => {
+    const modelSelect = document.querySelector('#model-select')
+    return !!modelSelect && Array.from(modelSelect.options).some(o => o.value)
+}
+
+const fetchAndUpdateModels = (apiKey) => {
+    if (!apiKey) return Promise.resolve([])
+
+    // Only show placeholder states when there are no models to fall back on.
+    // When cached models are already displayed, a failed refresh must not wipe them.
+    const hadModels = hasModelOptions()
+    if (!hadModels) showModelPlaceholder('Loading models...')
+
+    return getModels(apiKey).then(response => {
+        if (response && response.data) {
+            const models = updateModelsFromData(response.data)
+            if (models.length === 0 && !hadModels) {
+                showModelPlaceholder('No models available')
+            }
+            return models
+        }
+        if (!hadModels) showModelPlaceholder('No models available')
+        return []
+    }).catch(error => {
+        console.error('Error fetching models:', error)
+        if (!hadModels) showModelPlaceholder('No models available')
+        return []
+    })
+}
 
 const setupAPIKeyInput = () => {
     window.addEventListener('storage', event => {
@@ -69,6 +180,10 @@ const updateApiKeyStatus = () => {
             statusElements.forEach(x => x.innerText = 'This API key is working!')
             statusElements.forEach(x => x.classList.add('success'))
             continueElement.classList.remove('secondary')
+
+            if (response.data) {
+                updateModelsFromData(response.data)
+            }
         }
     }, error => {
         statusElements.forEach(x => x.innerText = 'There was an error when checking the API key.')
@@ -106,7 +221,7 @@ const setupSettingsHandlers = () => {
 
 const getUserSelectedModel = () => {
     const modelSelect = document.querySelector('#model-select')
-    return modelSelect.options[modelSelect.selectedIndex].value
+    return modelSelect ? modelSelect.value : ''
 }
 
 
@@ -264,6 +379,12 @@ window.addEventListener('load', () => {
     setupAPIKeyInput()
     setupSettingsHandlers()
 
+    const hasCachedModels = !!localStorage.getItem('cached-models')
+    loadCachedModels()
+
+    const storedApiKey = localStorage.getItem('api-key')
+    const modelsLoadedPromise = storedApiKey ? fetchAndUpdateModels(storedApiKey) : null
+
     let messages = [
         {
             'role': 'system',
@@ -279,7 +400,7 @@ window.addEventListener('load', () => {
         saveMarkdown(messages)
     })
 
-    const sendMessage = (message) => {
+    const sendMessage = async (message) => {
         removeErrorMessages()
         addSentMessage(message)
 
@@ -292,6 +413,10 @@ window.addEventListener('load', () => {
             'role': 'user',
             'content': message
         })
+
+        if (!hasCachedModels && modelsLoadedPromise) {
+            await modelsLoadedPromise
+        }
 
         const apiKey = localStorage.getItem('api-key')
         const model = getUserSelectedModel()
@@ -387,6 +512,7 @@ window.addEventListener('load', () => {
 
     const rotateSelectValue = selectId => {
         const select = document.querySelector(`#${selectId}`)
+        if (!select || select.options.length === 0) return
 
         if (select.selectedIndex < select.options.length - 1) {
             select.selectedIndex++
@@ -399,24 +525,14 @@ window.addEventListener('load', () => {
         select.dispatchEvent(event)
     }
 
-    // Check if there is a "last-selected-model" key in localStorage
-    // If there is, select that model
-    const modelSelect = document.querySelector('#model-select')
-    const lastSelectedModel = localStorage.getItem('last-selected-model')
-    if (lastSelectedModel) {
-        for (const option of modelSelect.options) {
-            if (option.value === lastSelectedModel) {
-                option.selected = true
-                break
-            }
-        }
-    }
-
     // Listen to changes in the model select
     // When the model is changed, save the new model in localStorage
+    const modelSelect = document.querySelector('#model-select')
     modelSelect.addEventListener('change', () => {
         const selectedModel = getUserSelectedModel()
-        localStorage.setItem('last-selected-model', selectedModel)
+        if (selectedModel) {
+            localStorage.setItem('last-selected-model', selectedModel)
+        }
     })
 
 })
