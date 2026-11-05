@@ -50,6 +50,14 @@ export const chatCompletionStream = (apiKey, data, callback) => {
         body: JSON.stringify(data)
     })
         .then(response => {
+            if (!response.ok) {
+                return response.json().then(errorJson => {
+                    callback(errorJson)
+                }).catch(() => {
+                    callback({ error: { message: `Request failed with status ${response.status}` } })
+                })
+            }
+
             const reader = response.body.getReader()
 
             let received = ''
@@ -92,5 +100,6 @@ export const chatCompletionStream = (apiKey, data, callback) => {
         })
         .catch(error => {
             console.error('Error:', error)
+            callback({ error: { message: error.message || 'Error communicating with API' } })
         })
 }
