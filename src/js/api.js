@@ -14,10 +14,6 @@ export const getModels = (apiKey) => {
 export const chatCompletion = (apiKey, data) => {
     const endpoint = 'https://api.openai.com/v1/chat/completions'
 
-    if (!data.model) {
-        data.model = 'gpt-3.5-turbo'
-    }
-
     return fetch(endpoint, {
         method: 'POST',
         headers: {
@@ -34,10 +30,6 @@ export const chatCompletion = (apiKey, data) => {
 
 export const chatCompletionStream = (apiKey, data, callback) => {
     const endpoint = 'https://api.openai.com/v1/chat/completions'
-
-    if (!data.model) {
-        data.model = 'gpt-3.5-turbo'
-    }
 
     data.stream = true
 
