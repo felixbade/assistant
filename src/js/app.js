@@ -91,8 +91,12 @@ const hasModelOptions = () => {
     return !!modelSelect && Array.from(modelSelect.options).some(o => o.value)
 }
 
+let latestModelsRequest = 0
+
 const loadModels = (apiKey) => {
     if (!apiKey) return Promise.resolve(null)
+
+    const request = ++latestModelsRequest
 
     // Show the remembered model immediately; only use placeholder states when
     // there is nothing to display, so a refresh doesn't wipe the dropdown.
@@ -102,6 +106,8 @@ const loadModels = (apiKey) => {
     if (!hasFallback) showModelPlaceholder('Loading models...')
 
     return getModels(apiKey).then(response => {
+        if (request !== latestModelsRequest) return { stale: true }
+
         if (response && response.data) {
             renderModelsFromData(response.data)
         } else if (showedSaved) {
@@ -112,6 +118,8 @@ const loadModels = (apiKey) => {
         return response
     }).catch(error => {
         console.error('Error fetching models:', error)
+        if (request !== latestModelsRequest) return { stale: true }
+
         if (showedSaved) {
             showSelectedModel(false)
         } else if (!hadModels) {
@@ -170,6 +178,8 @@ const updateApiKeyStatus = () => {
     statusElements.forEach(x => x.innerText = 'Checking...')
 
     loadModels(apiKey).then(response => {
+        if (response && response.stale) return
+
         if (!response || response.error) {
             statusElements.forEach(x => x.classList.add('error'))
             if (response && response.error && response.error.code === 'invalid_api_key') {
