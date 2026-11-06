@@ -91,8 +91,8 @@ const hasModelOptions = () => {
     return !!modelSelect && Array.from(modelSelect.options).some(o => o.value)
 }
 
-const fetchAndUpdateModels = (apiKey) => {
-    if (!apiKey) return Promise.resolve([])
+const loadModels = (apiKey) => {
+    if (!apiKey) return Promise.resolve(null)
 
     // Show the remembered model immediately; only use placeholder states when
     // there is nothing to display, so a refresh doesn't wipe the dropdown.
@@ -103,14 +103,13 @@ const fetchAndUpdateModels = (apiKey) => {
 
     return getModels(apiKey).then(response => {
         if (response && response.data) {
-            return renderModelsFromData(response.data)
-        }
-        if (showedSaved) {
+            renderModelsFromData(response.data)
+        } else if (showedSaved) {
             showSelectedModel(false)
         } else if (!hadModels) {
             showModelPlaceholder('No models available')
         }
-        return []
+        return response
     }).catch(error => {
         console.error('Error fetching models:', error)
         if (showedSaved) {
@@ -118,7 +117,7 @@ const fetchAndUpdateModels = (apiKey) => {
         } else if (!hadModels) {
             showModelPlaceholder('No models available')
         }
-        return []
+        return { error }
     })
 }
 
@@ -170,11 +169,10 @@ const updateApiKeyStatus = () => {
 
     statusElements.forEach(x => x.innerText = 'Checking...')
 
-    const models = getModels(apiKey)
-    models.then(response => {
-        if (response.error) {
+    loadModels(apiKey).then(response => {
+        if (!response || response.error) {
             statusElements.forEach(x => x.classList.add('error'))
-            if (response.error.code === 'invalid_api_key') {
+            if (response && response.error && response.error.code === 'invalid_api_key') {
                 statusElements.forEach(x => x.innerText = 'This API key doesn’t work.')
             } else {
                 statusElements.forEach(x => x.innerText = 'There was an error when checking the API key.')
@@ -183,14 +181,7 @@ const updateApiKeyStatus = () => {
             statusElements.forEach(x => x.innerText = 'This API key is working!')
             statusElements.forEach(x => x.classList.add('success'))
             continueElement.classList.remove('secondary')
-
-            if (response.data) {
-                renderModelsFromData(response.data)
-            }
         }
-    }, error => {
-        statusElements.forEach(x => x.innerText = 'There was an error when checking the API key.')
-        statusElements.forEach(x => x.classList.add('error'))
     })
 }
 
@@ -385,7 +376,7 @@ window.addEventListener('load', () => {
     const storedApiKey = localStorage.getItem('api-key')
     let modelsLoaded = null
     if (storedApiKey) {
-        modelsLoaded = fetchAndUpdateModels(storedApiKey)
+        modelsLoaded = loadModels(storedApiKey)
     } else {
         showModelPlaceholder('No models available')
     }
