@@ -14,10 +14,6 @@ export const getModels = (apiKey) => {
 export const chatCompletion = (apiKey, data) => {
     const endpoint = 'https://api.openai.com/v1/chat/completions'
 
-    if (!data.model) {
-        data.model = 'gpt-3.5-turbo'
-    }
-
     return fetch(endpoint, {
         method: 'POST',
         headers: {
@@ -35,10 +31,6 @@ export const chatCompletion = (apiKey, data) => {
 export const chatCompletionStream = (apiKey, data, callback) => {
     const endpoint = 'https://api.openai.com/v1/chat/completions'
 
-    if (!data.model) {
-        data.model = 'gpt-3.5-turbo'
-    }
-
     data.stream = true
 
     return fetch(endpoint, {
@@ -50,6 +42,14 @@ export const chatCompletionStream = (apiKey, data, callback) => {
         body: JSON.stringify(data)
     })
         .then(response => {
+            if (!response.ok) {
+                return response.json().then(errorJson => {
+                    callback(errorJson)
+                }).catch(() => {
+                    callback({ error: { message: `Request failed with status ${response.status}` } })
+                })
+            }
+
             const reader = response.body.getReader()
 
             let received = ''
@@ -92,5 +92,6 @@ export const chatCompletionStream = (apiKey, data, callback) => {
         })
         .catch(error => {
             console.error('Error:', error)
+            callback({ error: { message: error.message || 'Error communicating with API' } })
         })
 }

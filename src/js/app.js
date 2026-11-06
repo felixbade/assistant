@@ -3,10 +3,131 @@ import {
     parseHashParams,
     isScrolledToBottom,
     updateTextareaSize,
-    setupPersistentInputs
+    setupPersistentInputs,
+    filterAndSortModels,
+    formatModelName
 } from './utils'
 import { markdownToDocumentFragment } from './markdown'
 import html2canvas from 'html2canvas'
+
+const showModelPlaceholder = (text) => {
+    const modelSelect = document.querySelector('#model-select')
+    if (!modelSelect) return
+
+    modelSelect.innerHTML = ''
+    const option = document.createElement('option')
+    option.value = ''
+    option.disabled = true
+    option.selected = true
+    option.innerText = text
+    modelSelect.appendChild(option)
+}
+
+const showSelectedModel = (isLoading) => {
+    const savedModel = localStorage.getItem('last-selected-model')
+    const modelSelect = document.querySelector('#model-select')
+    if (!savedModel || !modelSelect) return false
+
+    modelSelect.innerHTML = ''
+
+    const selected = document.createElement('option')
+    selected.value = savedModel
+    selected.innerText = formatModelName(savedModel)
+    selected.selected = true
+    modelSelect.appendChild(selected)
+
+    if (isLoading) {
+        const loading = document.createElement('option')
+        loading.disabled = true
+        loading.innerText = 'Loading models...'
+        modelSelect.appendChild(loading)
+    }
+
+    return true
+}
+
+const renderModelOptions = (models) => {
+    if (!models || models.length === 0) {
+        showModelPlaceholder('No models available')
+        return
+    }
+
+    const modelSelect = document.querySelector('#model-select')
+    if (!modelSelect) return
+
+    const currentOptions = Array.from(modelSelect.options).map(o => o.value)
+    const isSame = currentOptions.length === models.length && currentOptions.every((v, i) => v === models[i])
+
+    const savedSelected = localStorage.getItem('last-selected-model')
+    const preferredSelected = modelSelect.value || savedSelected
+
+    if (!isSame) {
+        modelSelect.innerHTML = ''
+        for (const model of models) {
+            const option = document.createElement('option')
+            option.value = model
+            option.innerText = formatModelName(model)
+            modelSelect.appendChild(option)
+        }
+    }
+
+    if (preferredSelected && models.includes(preferredSelected)) {
+        modelSelect.value = preferredSelected
+    } else {
+        modelSelect.value = models[0]
+    }
+
+    localStorage.setItem('last-selected-model', modelSelect.value)
+}
+
+const renderModelsFromData = (data) => {
+    const models = filterAndSortModels(data)
+    renderModelOptions(models)
+    return models
+}
+
+const hasModelOptions = () => {
+    const modelSelect = document.querySelector('#model-select')
+    return !!modelSelect && Array.from(modelSelect.options).some(o => o.value)
+}
+
+let latestModelsRequest = 0
+
+const loadModels = (apiKey) => {
+    if (!apiKey) return Promise.resolve(null)
+
+    const request = ++latestModelsRequest
+
+    // Show the remembered model immediately; only use placeholder states when
+    // there is nothing to display, so a refresh doesn't wipe the dropdown.
+    const hadModels = hasModelOptions()
+    const showedSaved = !hadModels && showSelectedModel(true)
+    const hasFallback = hadModels || showedSaved
+    if (!hasFallback) showModelPlaceholder('Loading models...')
+
+    return getModels(apiKey).then(response => {
+        if (request !== latestModelsRequest) return { stale: true }
+
+        if (response && response.data) {
+            renderModelsFromData(response.data)
+        } else if (showedSaved) {
+            showSelectedModel(false)
+        } else if (!hadModels) {
+            showModelPlaceholder('No models available')
+        }
+        return response
+    }).catch(error => {
+        console.error('Error fetching models:', error)
+        if (request !== latestModelsRequest) return { stale: true }
+
+        if (showedSaved) {
+            showSelectedModel(false)
+        } else if (!hadModels) {
+            showModelPlaceholder('No models available')
+        }
+        return { error }
+    })
+}
 
 const setupAPIKeyInput = () => {
     window.addEventListener('storage', event => {
@@ -56,11 +177,12 @@ const updateApiKeyStatus = () => {
 
     statusElements.forEach(x => x.innerText = 'Checking...')
 
-    const models = getModels(apiKey)
-    models.then(response => {
-        if (response.error) {
+    loadModels(apiKey).then(response => {
+        if (response && response.stale) return
+
+        if (!response || response.error) {
             statusElements.forEach(x => x.classList.add('error'))
-            if (response.error.code === 'invalid_api_key') {
+            if (response && response.error && response.error.code === 'invalid_api_key') {
                 statusElements.forEach(x => x.innerText = 'This API key doesn’t work.')
             } else {
                 statusElements.forEach(x => x.innerText = 'There was an error when checking the API key.')
@@ -70,9 +192,6 @@ const updateApiKeyStatus = () => {
             statusElements.forEach(x => x.classList.add('success'))
             continueElement.classList.remove('secondary')
         }
-    }, error => {
-        statusElements.forEach(x => x.innerText = 'There was an error when checking the API key.')
-        statusElements.forEach(x => x.classList.add('error'))
     })
 }
 
@@ -106,7 +225,7 @@ const setupSettingsHandlers = () => {
 
 const getUserSelectedModel = () => {
     const modelSelect = document.querySelector('#model-select')
-    return modelSelect.options[modelSelect.selectedIndex].value
+    return modelSelect ? modelSelect.value : ''
 }
 
 
@@ -264,6 +383,14 @@ window.addEventListener('load', () => {
     setupAPIKeyInput()
     setupSettingsHandlers()
 
+    const storedApiKey = localStorage.getItem('api-key')
+    let modelsLoaded = null
+    if (storedApiKey) {
+        modelsLoaded = loadModels(storedApiKey)
+    } else {
+        showModelPlaceholder('No models available')
+    }
+
     let messages = [
         {
             'role': 'system',
@@ -294,7 +421,7 @@ window.addEventListener('load', () => {
         })
 
         const apiKey = localStorage.getItem('api-key')
-        const model = getUserSelectedModel()
+        const model = getUserSelectedModel() || localStorage.getItem('last-selected-model')
 
         let newMessage = {}
         let newMessageBubble = null
@@ -345,7 +472,11 @@ window.addEventListener('load', () => {
 
     const hashParams = parseHashParams()
     if ('q' in hashParams && hashParams.q) {
-        sendMessage(hashParams.q)
+        if (modelsLoaded) {
+            modelsLoaded.then(() => sendMessage(hashParams.q))
+        } else {
+            sendMessage(hashParams.q)
+        }
     }
 
     const submitMessageForm = () => {
@@ -387,6 +518,7 @@ window.addEventListener('load', () => {
 
     const rotateSelectValue = selectId => {
         const select = document.querySelector(`#${selectId}`)
+        if (!select || select.options.length === 0) return
 
         if (select.selectedIndex < select.options.length - 1) {
             select.selectedIndex++
@@ -399,24 +531,14 @@ window.addEventListener('load', () => {
         select.dispatchEvent(event)
     }
 
-    // Check if there is a "last-selected-model" key in localStorage
-    // If there is, select that model
-    const modelSelect = document.querySelector('#model-select')
-    const lastSelectedModel = localStorage.getItem('last-selected-model')
-    if (lastSelectedModel) {
-        for (const option of modelSelect.options) {
-            if (option.value === lastSelectedModel) {
-                option.selected = true
-                break
-            }
-        }
-    }
-
     // Listen to changes in the model select
     // When the model is changed, save the new model in localStorage
+    const modelSelect = document.querySelector('#model-select')
     modelSelect.addEventListener('change', () => {
         const selectedModel = getUserSelectedModel()
-        localStorage.setItem('last-selected-model', selectedModel)
+        if (selectedModel) {
+            localStorage.setItem('last-selected-model', selectedModel)
+        }
     })
 
 })
