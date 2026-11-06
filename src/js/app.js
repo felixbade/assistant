@@ -23,6 +23,29 @@ const showModelPlaceholder = (text) => {
     modelSelect.appendChild(option)
 }
 
+const showSelectedModel = (isLoading) => {
+    const savedModel = localStorage.getItem('last-selected-model')
+    const modelSelect = document.querySelector('#model-select')
+    if (!savedModel || !modelSelect) return false
+
+    modelSelect.innerHTML = ''
+
+    const selected = document.createElement('option')
+    selected.value = savedModel
+    selected.innerText = formatModelName(savedModel)
+    selected.selected = true
+    modelSelect.appendChild(selected)
+
+    if (isLoading) {
+        const loading = document.createElement('option')
+        loading.disabled = true
+        loading.innerText = 'Loading models...'
+        modelSelect.appendChild(loading)
+    }
+
+    return true
+}
+
 const renderModelOptions = (models) => {
     if (!models || models.length === 0) {
         showModelPlaceholder('No models available')
@@ -57,36 +80,9 @@ const renderModelOptions = (models) => {
     localStorage.setItem('last-selected-model', modelSelect.value)
 }
 
-const loadCachedModels = () => {
-    try {
-        const cached = localStorage.getItem('cached-models')
-        if (cached) {
-            const models = JSON.parse(cached)
-            if (Array.isArray(models) && models.length > 0) {
-                renderModelOptions(models)
-                return
-            }
-        }
-
-        // For existing users who don't have cached-models yet:
-        const lastModel = localStorage.getItem('last-selected-model')
-        if (lastModel) {
-            renderModelOptions([lastModel])
-            return
-        }
-    } catch (e) {
-        console.error('Error loading cached models:', e)
-    }
-
-    renderModelOptions([])
-}
-
-const updateModelsFromData = (data) => {
+const renderModelsFromData = (data) => {
     const models = filterAndSortModels(data)
-    if (models.length > 0) {
-        localStorage.setItem('cached-models', JSON.stringify(models))
-        renderModelOptions(models)
-    }
+    renderModelOptions(models)
     return models
 }
 
@@ -98,24 +94,30 @@ const hasModelOptions = () => {
 const fetchAndUpdateModels = (apiKey) => {
     if (!apiKey) return Promise.resolve([])
 
-    // Only show placeholder states when there are no models to fall back on.
-    // When cached models are already displayed, a failed refresh must not wipe them.
+    // Show the remembered model immediately; only use placeholder states when
+    // there is nothing to display, so a refresh doesn't wipe the dropdown.
     const hadModels = hasModelOptions()
-    if (!hadModels) showModelPlaceholder('Loading models...')
+    const showedSaved = !hadModels && showSelectedModel(true)
+    const hasFallback = hadModels || showedSaved
+    if (!hasFallback) showModelPlaceholder('Loading models...')
 
     return getModels(apiKey).then(response => {
         if (response && response.data) {
-            const models = updateModelsFromData(response.data)
-            if (models.length === 0 && !hadModels) {
-                showModelPlaceholder('No models available')
-            }
-            return models
+            return renderModelsFromData(response.data)
         }
-        if (!hadModels) showModelPlaceholder('No models available')
+        if (showedSaved) {
+            showSelectedModel(false)
+        } else if (!hadModels) {
+            showModelPlaceholder('No models available')
+        }
         return []
     }).catch(error => {
         console.error('Error fetching models:', error)
-        if (!hadModels) showModelPlaceholder('No models available')
+        if (showedSaved) {
+            showSelectedModel(false)
+        } else if (!hadModels) {
+            showModelPlaceholder('No models available')
+        }
         return []
     })
 }
@@ -183,7 +185,7 @@ const updateApiKeyStatus = () => {
             continueElement.classList.remove('secondary')
 
             if (response.data) {
-                updateModelsFromData(response.data)
+                renderModelsFromData(response.data)
             }
         }
     }, error => {
@@ -380,11 +382,13 @@ window.addEventListener('load', () => {
     setupAPIKeyInput()
     setupSettingsHandlers()
 
-    const hasCachedModels = !!localStorage.getItem('cached-models')
-    loadCachedModels()
-
     const storedApiKey = localStorage.getItem('api-key')
-    const modelsLoadedPromise = storedApiKey ? fetchAndUpdateModels(storedApiKey) : null
+    let modelsLoaded = null
+    if (storedApiKey) {
+        modelsLoaded = fetchAndUpdateModels(storedApiKey)
+    } else {
+        showModelPlaceholder('No models available')
+    }
 
     let messages = [
         {
@@ -401,7 +405,7 @@ window.addEventListener('load', () => {
         saveMarkdown(messages)
     })
 
-    const sendMessage = async (message) => {
+    const sendMessage = (message) => {
         removeErrorMessages()
         addSentMessage(message)
 
@@ -415,12 +419,8 @@ window.addEventListener('load', () => {
             'content': message
         })
 
-        if (!hasCachedModels && modelsLoadedPromise) {
-            await modelsLoadedPromise
-        }
-
         const apiKey = localStorage.getItem('api-key')
-        const model = getUserSelectedModel()
+        const model = getUserSelectedModel() || localStorage.getItem('last-selected-model')
 
         let newMessage = {}
         let newMessageBubble = null
@@ -471,7 +471,11 @@ window.addEventListener('load', () => {
 
     const hashParams = parseHashParams()
     if ('q' in hashParams && hashParams.q) {
-        sendMessage(hashParams.q)
+        if (modelsLoaded) {
+            modelsLoaded.then(() => sendMessage(hashParams.q))
+        } else {
+            sendMessage(hashParams.q)
+        }
     }
 
     const submitMessageForm = () => {
