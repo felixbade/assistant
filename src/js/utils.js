@@ -63,6 +63,22 @@ export const filterAndSortModels = (rawModels) => {
         .sort(compareModels)
 }
 
+export const formatModelName = (id) => {
+    if (!id) return ''
+
+    const [prefix, ...rest] = id.split('-')
+
+    let version = ''
+    if (rest.length > 0 && /^\d/.test(rest[0])) {
+        version = `-${rest.shift()}`
+    }
+
+    const variants = rest.map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    const label = `${prefix.toUpperCase()}${version}`
+
+    return variants.length > 0 ? `${label} ${variants.join(' ')}` : label
+}
+
 export const setupPersistentInputs = () => {
     const persistentInputs = document.querySelectorAll('[data-persistent-name]')
     const getName = element => element.getAttribute('data-persistent-name')

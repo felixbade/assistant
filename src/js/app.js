@@ -4,7 +4,8 @@ import {
     isScrolledToBottom,
     updateTextareaSize,
     setupPersistentInputs,
-    filterAndSortModels
+    filterAndSortModels,
+    formatModelName
 } from './utils'
 import { markdownToDocumentFragment } from './markdown'
 import html2canvas from 'html2canvas'
@@ -42,7 +43,7 @@ const renderModelOptions = (models) => {
         for (const model of models) {
             const option = document.createElement('option')
             option.value = model
-            option.innerText = model
+            option.innerText = formatModelName(model)
             modelSelect.appendChild(option)
         }
     }
